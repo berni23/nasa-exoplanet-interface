@@ -20,7 +20,7 @@ body {
     padding: 0;
     width: 100% !important;
     height: 100% !important;
-    /*background-color: #17182f;*/
+    background-color: #17182f;
 }
 
 canvas {
@@ -62,7 +62,9 @@ nav {
 #nasa-icon {
 
     padding: 70px 0;
+    margin: auto;
     opacity: 0.5;
+    z-index: 5;
 }
 
 .main {
