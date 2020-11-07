@@ -1,10 +1,10 @@
 {
     "particles": {
         "number": {
-            "value": 20,
+            "value": 15,
             "density": {
                 "enable": true,
-                "value_area": 300
+                "value_area": 400
             }
         },
         "shape": {

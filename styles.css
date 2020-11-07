@@ -30,8 +30,10 @@ canvas {
     background-image: url("assets/NASA_logo.svg");
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 200px !important;
-    z-index: 999;
+    margin: auto !important;
+    width: 500px;
+    height: 500px;
+    z-index: 2 !important;
 }
 
 
