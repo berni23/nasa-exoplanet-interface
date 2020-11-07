@@ -4,13 +4,13 @@
             "value": 20,
             "density": {
                 "enable": true,
-                "value_area": 800
+                "value_area": 300
             }
         },
         "shape": {
             "type": "circle",
             "stroke": {
-                "width": 2,
+                "width": 0.5,
                 "color": "#fff"
             },
             "polygon": {
