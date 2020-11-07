@@ -1,3 +1,11 @@
+@font-face {
+
+    font-family: 'nasa';
+    src: url('assets/Nasa.woff') format('woff'),
+        url('assets/Nasa.ttf') format('truetype');
+
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,14 +14,19 @@
 
 
 
+
 body {
     margin: 0;
+    padding: 0;
+    width: 100% !important;
+    height: 100% !important;
     /*background-color: #17182f;*/
 }
 
 canvas {
     display: block;
 }
+
 
 
 /* ---- particles.js container ---- */
@@ -25,19 +38,61 @@ canvas {
     z-index: 1 !important;
 }
 
-.logo-nasa {
+nav {
 
-    background-image: url("assets/NASA_logo.svg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: auto !important;
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     z-index: 2 !important;
+}
+
+#nasa-logo {
+
+    text-align: center;
+    display: block;
+    margin: auto;
+    padding-top: 150px;
+    color: rgba(255, 0, 0, 0.4);
+    font-family: 'nasa';
+    font-size: 50px;
+    z-index: 2 !important;
+
+}
+
+#nasa-icon {
+
+    padding: 70px 0;
+    opacity: 0.5;
+}
+
+.main {
+    z-index: 3;
+}
+
+.login-panel {
+
+    text-align: center;
+    display: flex;
+    width: 400px;
+    height: 300px;
+    margin: auto !important;
+
+    /* background-color: rgba(255, 255, 255);*/
+
+    z-index: 1 !important;
 }
 
 
 
+.login-panel p {
+
+
+    margin-right: 100px;
+    font-family: 'nasa';
+    font-size: 50px;
+    color: rgba(255, 0, 0, 0.4);
+
+}
 
 
 @keyframes move-twink-back {
@@ -130,16 +185,16 @@ canvas {
     width: 100%;
     height: 100%;
     display: block;
+    z-index: -1 !important;
 }
 
 .stars {
     background: #000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
-    z-index: 0;
 }
 
 .twinkling {
     background: transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
-    z-index: 0;
+
 
     -moz-animation: move-twink-back 200s linear infinite;
     -ms-animation: move-twink-back 200s linear infinite;
