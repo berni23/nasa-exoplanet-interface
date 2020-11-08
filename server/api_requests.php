@@ -20,7 +20,10 @@ if (isset($_GET['data'])) {
 
     else {
 
-        $data = json_decode(file_get_contents($endpoint . "?api_key=" . $api_key . "table=" . $_GET['data'] . "&format=json"), true);
+
+        $table = file_get_contents($endpoint . "?api_key=" . $api_key . "&table=" . $_GET['data'] . "&format=json");
+
+        $data = json_decode($table, true);
         $firstRow = $data[0];
         $header = array_keys($firstRow);
         $status = writeCSV($path, $data, $header);
