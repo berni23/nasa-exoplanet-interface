@@ -4,7 +4,7 @@
  * @returns {promise} a promise, outputing an array created with the File class (php)
  */
 function getData() {
-    return fetch('server/data.php?data').then(res => res.text());
+    return fetch('server/api_requests.php?data').then(res => res.text());
 }
 
 
