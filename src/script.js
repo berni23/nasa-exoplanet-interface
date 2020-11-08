@@ -10,13 +10,42 @@
 
 window.onload = function () {
 
-    async function getData() {
+    async function requestAPI() {
         const res = await fetch('server/api_requests.php?data=exoplanets').then(res => res.text());
         console.log(res);
     }
 
 
+    async function getColumns() {
+        const res = await fetch('server/viewmodel.php?columns').then(res => res.text());
+        console.log(res);
+    }
 
-    getData();
 
+    requestAPI().then(getColumns())
+
+
+
+
+
+
+
+
+
+    // post
+
+    /*
+
+    async function editFile(path, newName) {
+        var data = {
+            path: path,
+            newname: newName
+        }
+        const res = await fetch('src/server/files.php?edit', {
+            method: 'POST',
+            body: JSON.stringify(data)
+        });
+        return await res.text();
+    }
+    */
 }
