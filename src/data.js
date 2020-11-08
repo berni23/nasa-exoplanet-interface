@@ -1,11 +1,15 @@
 /**
- * @description gets a files or folders specified
- * @param {string} path path of the desired file
- * @returns {promise} a promise, outputing an array created with the File class (php)
+ * @description requests the exoplanet csv data through PHP. If exoplanets.csv exists, nothing is downloaded
+ * @returns {promise} a promise, with a string message and a status( 400 or 200)
  */
-function getData() {
-    return fetch('server/api_requests.php?data').then(res => res.text());
+
+async function requestAPI() {
+    const res = await fetch('server/api_requests.php?data=exoplanets').then(res => res.text());
+    console.log(res);
 }
 
 
-getData();
+async function getColumns() {
+    const res = await fetch('server/viewmodel.php?columns').then(res => res.text());
+    console.log(res);
+}

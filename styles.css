@@ -12,9 +12,6 @@
 }
 
 
-
-
-
 body {
     margin: 0;
     padding: 0;
@@ -46,7 +43,7 @@ nav {
     z-index: 2 !important;
 }
 
-#nasa-logo {
+#loginTitle {
 
     text-align: center;
     display: block;
@@ -203,4 +200,10 @@ nav {
     -o-animation: move-twink-back 200s linear infinite;
     -webkit-animation: move-twink-back 200s linear infinite;
     animation: move-twink-back 200s linear infinite;
+}
+
+
+.hidden {
+
+    display: none !important;
 }
