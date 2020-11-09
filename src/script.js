@@ -55,20 +55,16 @@ window.onload = function () {
     })
     // post
 
-    /*
 
-    async function editFile(path, newName) {
-        var data = {
-            path: path,
-            newname: newName
-        }
-        const res = await fetch('src/server/files.php?edit', {
+    async function checkUser(data) {
+
+        const res = await fetch('server/sign.php?login', {
             method: 'POST',
             body: JSON.stringify(data)
-        });
-        return await res.text();
+        }).then(res => res.text());
+        console.log(res);
     }
-    */
+
 
     function hideLogin() {
 
@@ -85,8 +81,7 @@ window.onload = function () {
         inputs.pop();
         var conditions = [/\b.{3,}\b/, /(?=.*\d)(?=.*[A-Z]).{6,}/];
         var errors = [errName, errPassword];
-        console.log(inputs);
-        validateLoop(inputs, conditions, errors);
+        if (validateLoop(inputs, conditions, errors)) checkUser(formData);
     }
 
 
@@ -95,7 +90,6 @@ window.onload = function () {
         let validation = true;
         if (!condition.test($(input).val())) {
             $(input).after("<div class='error-msg col-lg-12 col-md-8'><p>" + errorMsg + "</p></div>");
-            $(input).addClass("error-input")
             validation = false;
         }
         return validation; // true if validation passed, else false
@@ -105,6 +99,8 @@ window.onload = function () {
         clearErrors();
         var valid = true;
         inputs.forEach(function (input, i) {
+
+            console.log(input);
             if (!validate(input, conditions[i], messages[i])) valid = false;
 
         })
@@ -115,9 +111,7 @@ window.onload = function () {
     // clear form errors
     function clearErrors() {
         var errorMsg = $(".error-msg");
-        var errorInput = $(".error-input");
         for (let div of errorMsg) $(div).remove();
-        for (let div of errorInput) $(div).classList.remove("error-input");
     }
 
 }
