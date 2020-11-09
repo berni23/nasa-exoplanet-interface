@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <script type='module' src="src/sign.js" defer></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+    <title>NASA EXOPLANET INTERFACE</title>
+</head>
+
+<body>
+
+    <section class="login">
+        <div id="particles-js">
+        </div>
+        <nav>
+            <p id="loginTitle" style="display:none">EXOPLANET DATA INTERFACE</p>
+            <a id="nasa-icon" style="display:none" href="https://www.nasa.gov"> <img src=" assets/NASA_logo.svg"></a>
+        </nav>
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        <div class="main">
+            <div class="login-panel" style="display:none">
+                <div class="background"></div>
+                <div class="options">
+                    <p class="option-login option-selected">LOGIN</p>
+                    <p class="option-register">REGISTER</p>
+                </div>
+
+                <form class="login-form">
+                    <input class="username" name="username" type="text" placeholder="username" value="bernat">
+                    <input name="password" type="text" placeholder="password" value="A12345">
+                    <button class="sign" id="signin" name="signing">sign in</button>
+
+                </form>
+
+                <form class="register-form hidden">
+                    <input name="username" type="text" placeholder="username">
+                    <input name="password" type="text" placeholder="password">
+                    <input name="confirm password" type="text" placeholder="confirm password">
+                    <button class="sign" id="signup" name="signup">sign up</button>
+
+                </form>
+            </div>
+    </section>
+</body>
+
+</html>
