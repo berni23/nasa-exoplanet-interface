@@ -49,7 +49,8 @@ nav {
     display: block;
     margin: auto;
     padding-top: 150px;
-    color: rgba(255, 0, 0, 0.4);
+    opacity: 0.5;
+    color: rgba(255, 0, 0, 1);
     font-family: 'nasa';
     font-size: 50px;
     z-index: 2 !important;
@@ -57,12 +58,12 @@ nav {
 }
 
 #nasa-icon {
-
     padding: 70px 0;
     margin: auto;
-    opacity: 0.5;
+    padding-right: 40px;
     z-index: 5;
 }
+
 
 .main {
     z-index: 3;
@@ -70,18 +71,35 @@ nav {
 
 .login-panel {
 
-    text-align: center;
     display: flex;
-    width: 400px;
+    flex-direction: column;
     margin: auto !important;
 
     /* background-color: rgba(255, 255, 255);*/
 }
 
 
+.options {
+    text-align: center;
+    display: flex;
+    margin: auto !important;
 
-.login-panel p {
-    margin-right: 100px;
+
+}
+
+.option-login {
+
+    border-bottom: 1px solid red;
+    padding-bottom: 3px;
+}
+
+.option-register {
+
+    margin-left: 100px;
+}
+
+.options>p {
+
     font-family: 'nasa';
     height: auto;
     font-size: 50px;
@@ -96,6 +114,15 @@ nav {
     color: rgba(255, 0, 0, 1);
     transition: all 0.5s linear;
 
+}
+
+.background {
+
+    width: 100%;
+    height: auto;
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.4) !important;
+    opacity: 0.4;
 }
 
 @keyframes move-twink-back {
@@ -210,4 +237,43 @@ nav {
 .hidden {
 
     display: none !important;
+}
+
+
+
+/* login form */
+
+
+
+form {
+
+
+
+    margin: auto;
+    margin-top: 50px;
+    padding: 50px;
+    border-radius: 10px;
+
+    background-color: rgba(255, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+
+form input {
+
+
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    color: red;
+    padding: 10px;
+    outline: none;
+    border: none;
+}
+
+
+
+form input:not(:first-child) {
+
+    margin-top: 10px;
 }

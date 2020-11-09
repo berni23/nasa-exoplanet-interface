@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="styles.css" />
     <script type='module' src="src/script.js" defer></script>
     <script src="src/data.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
     <title>NASA EXOPLANET INTERFACE</title>
 </head>
 
@@ -25,15 +28,21 @@
         <div class="stars"></div>
         <div class="twinkling"></div>
         <div class="main">
-            <div style="display:none" class="login-panel">
-                <p class="option-login">LOGIN</p>
-                <p class="option-register">REGISTER</p>
-            </div>
-        </div>
+            <div class="login-panel">
+
+                <div class="background"></div>
+                <div class="options">
+                    <p class="option-login ">LOGIN</p>
+                    <p class="option-register">REGISTER</p>
+                </div>
+
+                <form>
+
+                    <input name="username" type="text" placeholder="username">
+                    <input name="password" type="text" placeholder="password">
+
+                </form>
     </section>
-
-
-
 </body>
 
 </html>
