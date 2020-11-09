@@ -17,8 +17,8 @@ if (isset($_GET['login'])) {
         $_SESSION['username'] = $loggedIn[1]['username'];
         $_SESSION['token'] = $loggedIn[1]['token'];
 
-        echo json_encode(array("status" => "200", "message" => "login successful"));
-    } else   echo json_encode(array("status" => "200", "message" => "username or password incorrect"));
+        echo json_encode(array("status" => 200, "message" => "login successful"));
+    } else   echo json_encode(array("status" => 400, "message" => "username or password incorrect"));
 }
 
 

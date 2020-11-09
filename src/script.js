@@ -62,7 +62,13 @@ window.onload = function () {
             method: 'POST',
             body: JSON.stringify(data)
         }).then(res => res.text());
-        console.log(res);
+
+        res = JSON.parse(res);
+        if (res['status'] == 400) {
+
+            $('login-form>.username').after("<div class='error-msg col-lg-12 col-md-8'><p> Incorrect username or password</p></div>");
+
+        }
     }
 
 
