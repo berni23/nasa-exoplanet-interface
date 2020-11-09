@@ -7,7 +7,7 @@ include "utils.php";
 
 $endpoint = 'https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?';
 $api_key = 'ZCrKb54pVc2uAAtKJ2lTo7v9hPSKloPXkenCr1X8';
-$dataPath = getDataPath();
+$dataPath = $_SESSION['data_path'];
 
 if (isset($_GET['data'])) {
 

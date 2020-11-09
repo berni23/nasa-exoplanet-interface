@@ -13,3 +13,10 @@ async function getColumns() {
     const res = await fetch('server/viewmodel.php?columns').then(res => res.text());
     console.log(res);
 }
+
+async function getCurrentUser() {
+
+    const res = await fetch('server/sign.php?user').then(res => res.text());
+    console.log(res);
+
+}

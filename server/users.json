@@ -1,7 +1,17 @@
 {
-    "302rfodcot04r9u04hw": {
-        "token": "302rfodcot04r9u04hw",
+    "6094a63695dfbf246396110988f496": {
+        "username": "mongo",
+        "password": "A12345",
+        "token": "6094a63695dfbf246396110988f496"
+    },
+    "default": {
         "username": "bernat",
-        "password": "A12345"
+        "password": "A12345",
+        "token": "default"
+    },
+    "323663e8ca8fad928fcbdee6f1406d": {
+        "username": "vladi",
+        "password": "A12345",
+        "token": "323663e8ca8fad928fcbdee6f1406d"
     }
 }

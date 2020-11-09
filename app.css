@@ -1,0 +1,21 @@
+@font-face {
+
+    font-family: 'nasa';
+    src: url('assets/Nasa.woff') format('woff'),
+        url('assets/Nasa.ttf') format('truetype');
+
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+    height: 100% !important;
+    font-family: sans-serif !important;
+}
