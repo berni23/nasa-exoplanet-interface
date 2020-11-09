@@ -1,6 +1,15 @@
 <?php
 session_start();
 
+
+
+
+if (isset($_GET['user'])) {
+
+    echo $_SESSION['username'];
+    exit;
+}
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data['action'] == 'login') {
@@ -24,20 +33,6 @@ if ($data['action'] == 'login') {
         echo json_encode(array("status" => 200, "message" => "register successful"));
     }
 }
-
-
-
-if (isset($_GET['user'])) {
-
-    echo 'hey bitches';
-    exit;
-
-    echo $_SESSION['username'];
-}
-
-
-
-
 
 
 

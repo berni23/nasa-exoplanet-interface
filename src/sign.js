@@ -1,4 +1,4 @@
-window.onload = function () {
+$(document).ready(function () {
 
     var sectionLogin = $('.login');
     var loginTitle = $("#loginTitle");
@@ -119,4 +119,4 @@ window.onload = function () {
         var errorMsg = $(".error-msg");
         for (let div of errorMsg) $(div).remove();
     }
-}
+});
