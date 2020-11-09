@@ -25,7 +25,6 @@ canvas {
 }
 
 
-
 /* ---- particles.js container ---- */
 
 #particles-js {
@@ -44,7 +43,6 @@ nav {
 }
 
 #loginTitle {
-
     text-align: center;
     display: block;
     margin: auto;
@@ -53,7 +51,6 @@ nav {
     font-family: 'nasa';
     font-size: 50px;
     z-index: 2 !important;
-
 }
 
 #nasa-icon {
@@ -62,6 +59,8 @@ nav {
     padding-right: 40px;
     z-index: 3;
 }
+
+
 
 
 .main {

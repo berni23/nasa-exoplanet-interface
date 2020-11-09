@@ -14,6 +14,8 @@
 }
 
 
+
+
 body {
     margin: 0;
     padding: 0;
@@ -22,6 +24,10 @@ body {
     font-family: sans-serif !important;
 }
 
+ul {
+
+    list-style-type: none;
+}
 
 .navbar {
     padding: 15px 10px;
@@ -41,14 +47,43 @@ body {
 
 
 .container-fluid h2 {
-
-
     margin: auto;
 }
 
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
+
+
+.caret {
+    float: right;
+    margin-right: 10px;
+    margin-top: 7px;
+}
+
+.dropdownMenu {
+    margin-left: 20px;
+}
+
+.dropdownMenu li {
+    font-size: .9rem !important;
+    padding: 10px !important;
+
+}
+
+.sidebar-body li {
+    padding: 20px;
+    font-size: 1.2rem;
+}
+
+.sidebar-body span {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.sidebar-body li:hover {
+    background: #6d7fcc;
+}
 
 .wrapper {
     display: flex;
@@ -98,6 +133,7 @@ body {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    overflow: auto;
 }
 
 #sidebarCollapse {
@@ -175,4 +211,20 @@ body {
         transform: rotate(-45deg) translate(1px, -1px);
     }
 
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+
+/** CHARTS**/
+
+
+#myChart {
+
+    max-height: 700px !important;
+    max-width: 700px !important;
 }

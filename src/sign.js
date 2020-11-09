@@ -15,7 +15,6 @@ $(document).ready(function () {
         pJSDom[0].pJS.particles.move.enable = false;
     });
 
-    //requestAPI().then(getColumns());
 
     register.on("click", showRegister);
     login.on("click", showLogin);
