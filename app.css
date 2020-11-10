@@ -222,9 +222,15 @@ ul {
 
 /** CHARTS**/
 
+#myChart2 {
 
-#myChart {
+
+    height: 70% !important;
+}
+
+/*#myChart {
 
     max-height: 700px !important;
     max-width: 700px !important;
 }
+*/

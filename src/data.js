@@ -4,20 +4,35 @@
  */
 
 async function requestAPI() {
-    const res = await fetch('server/api_requests.php?data=exoplanets').then(res => res.text());
-    console.log(res);
+    const res = await fetch('server/api_requests.php?data=exoplanets');
+    return await res.text();
 }
 
 
 async function getColumns() {
-    const res = await fetch('server/viewmodel.php?columns').then(res => res.text());
-    console.log(res);
-    return JSON.parse(res);
+    const res = await fetch('server/viewmodel.php?columns');
+    return await res.text();
+
 }
 
 async function getCurrentUser() {
 
-    const res = await fetch('server/sign.php?user').then(res => res.text());
-    console.log(res);
+    const res = await fetch('server/sign.php?user');
+    return await res.text();
+
+}
+
+
+function dataScatter(dataX, dataY) {
+
+    var data = dataX.map(function (x, i) {
+
+        return {
+            'x': x,
+            'y': dataY[i]
+        }
+
+    });
+    return data;
 
 }

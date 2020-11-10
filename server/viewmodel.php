@@ -7,17 +7,20 @@ include "utils.php";
 
 if (isset($_GET['columns'])) {
 
+
     //$data = json_decode(file_get_contents('php://input'), true);
 
     //chmod($destination, 0777);
 
-    echo (json_encode(distanceVSradius()));
+    $data = distanceVSradius();
+
+    echo json_encode($data);
 }
 
 function distanceVSradius()
 {
 
-    if (($fh = fopen('data/exoplanets.csv', 'r+')) != false) {
+    if (($fh = fopen("data/bernat/exoplanets.csv", "r+")) !== false) {
         $header = fgetcsv($fh, 1000, ",");
         $num_colAxis = array_search('pl_orbsmax', $header);
         $num_radius = array_search('pl_radj', $header);
@@ -32,5 +35,5 @@ function distanceVSradius()
             }
         }
         return array(array($a_AU, $rad_Rjup), array("status" => 200, "message" => "data successfully downloaded"));
-    } else  array(array(null), array("status" => 400, "message" => "data not found"));
+    } else   return array(null, array("status" => 400, "message" => "data not found"));
 }
