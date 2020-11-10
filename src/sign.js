@@ -12,7 +12,7 @@ $(document).ready(function () {
     particlesJS.load('particles-js', 'assets/particles.json', function () {
         loginTitle.fadeIn(5000);
         nasaIcon.fadeIn(2000, () => loginPanel.fadeIn(3000));
-        pJSDom[0].pJS.particles.move.enable = false;
+        // pJSDom[0].pJS.particles.move.enable = false;
     });
 
     //requestAPI().then(getColumns());
