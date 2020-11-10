@@ -10,13 +10,9 @@ jQuery(function () {
         $(this).toggleClass('active');
         if (!myChart.hasClass('hidden')) {
 
-            //var oldWidth = myChart.width();
             if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
 
             else myChart.width(`-=${menuWidth}`);
-
-
-
 
 
         }
@@ -45,20 +41,14 @@ jQuery(function () {
     //  var dataColumns = JSON.parse(getColumns());
 
     function setAxisMax(max) {
-
         customConfig.options.scales.xAxes[0].ticks.max = max;
-
         new Chart(myChart, customConfig);
-
-
     }
 
     var customConfig;
 
     function getDistanceVsRad() {
-
         getColumns().then(res => {
-
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
@@ -79,8 +69,6 @@ jQuery(function () {
                     }]
                 },
                 options: {
-
-
                     legend: {
                         display: false
                     },
@@ -107,7 +95,7 @@ jQuery(function () {
 
                             ticks: {
                                 min: 0,
-                                max: 0.4,
+                                max: 1.4
 
                                 // max: 0.4 //1.5 
                             }
@@ -115,12 +103,10 @@ jQuery(function () {
                         }],
 
                         yAxes: [{
-
                             scaleLabel: {
                                 display: true,
                                 labelString: labels.y
                             },
-
                             ticks: {
                                 min: 0,
                                 max: 2.5
@@ -131,7 +117,6 @@ jQuery(function () {
             }
 
             new Chart(myChart, config);
-
             customConfig = config;
 
         })
