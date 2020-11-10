@@ -67,8 +67,6 @@ $(document).ready(function () {
 
     }
 
-
-
     function validate(action = "login") {
         var formData = Object.fromEntries(new FormData(document.querySelector(`.${action}-form`)).entries());
         formData.action = action;
@@ -79,7 +77,6 @@ $(document).ready(function () {
         var conditions = [/\b.{3,}\b/, /(?=.*\d)(?=.*[A-Z]).{6,}/];
         var errors = [errName, errPassword];
         return [validateLoop(inputs, conditions, errors), formData];
-
     }
 
 

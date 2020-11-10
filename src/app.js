@@ -33,26 +33,52 @@ jQuery(function () {
 
         getColumns().then(res => {
 
-
+            console.log(res);
             res = JSON.parse(res);
 
-            console.log('message', res[1]);
-            var columns = res[0];
-            var dataPlot = dataScatter(columns[0], columns[1]);
+            console.log('message', res["message"]);
+            var columns = res["data"];
+            var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
+            var names = columns["pl_name"];
+
+            var labels = {
+                x: 'semimajor axis(AU)',
+                y: 'planet radius (Rjup)'
+            }
 
             new Chart(document.getElementById("myChart2"), {
                 type: 'scatter',
                 data: {
                     datasets: [{
                         label: 'Scatter Dataset',
-                        data: dataPlot
+                        data: dataPlot,
+
                     }]
                 },
+
                 options: {
+
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, ) {
+                                var label = names[tooltipItem.index];
+
+                                return label;
+                            }
+                        }
+
+                    },
                     scales: {
                         xAxes: [{
                             type: 'linear',
                             position: 'bottom',
+
+
+                            scaleLabel: {
+
+                                display: true,
+                                labelString: labels.x
+                            },
 
                             ticks: {
                                 min: 0,
@@ -63,6 +89,12 @@ jQuery(function () {
                         }],
 
                         yAxes: [{
+
+                            scaleLabel: {
+
+                                display: true,
+                                labelString: labels.y
+                            },
 
                             ticks: {
 
