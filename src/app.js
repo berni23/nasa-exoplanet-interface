@@ -10,12 +10,16 @@ jQuery(function () {
         $(this).toggleClass('active');
         if (!myChart.hasClass('hidden')) {
 
-            var oldWidth = myChart.width();
-            if (sidebar.hasClass('active')) myChart.width(oldWidth + menuWidth);
-            else myChart.width(oldWidth - menuWidth);
+            //var oldWidth = myChart.width();
+            if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
+
+            else myChart.width(`-=${menuWidth}`);
+
+
+
+
 
         }
-
     });
 
     menuItems.on('click', function (event) {
@@ -71,9 +75,12 @@ jQuery(function () {
                     datasets: [{
                         label: 'Scatter Dataset',
                         data: dataPlot,
+                        backgroundColor: 'blue'
                     }]
                 },
                 options: {
+
+
                     legend: {
                         display: false
                     },
@@ -100,7 +107,9 @@ jQuery(function () {
 
                             ticks: {
                                 min: 0,
-                                max: 1.5
+                                max: 0.4,
+
+                                // max: 0.4 //1.5 
                             }
 
                         }],
