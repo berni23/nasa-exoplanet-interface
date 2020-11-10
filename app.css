@@ -14,8 +14,6 @@
 }
 
 
-
-
 body {
     margin: 0;
     padding: 0;
@@ -222,6 +220,12 @@ ul {
 
 /** CHARTS**/
 
+
+#myChart2 {
+
+
+    width: 100%;
+}
 
 
 /*#myChart {

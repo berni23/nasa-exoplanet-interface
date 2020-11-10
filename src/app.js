@@ -1,9 +1,21 @@
 jQuery(function () {
     var menuItems = $('.sidebar-body ul');
+    var sidebar = $('#sidebar');
+    var myChart = $("#myChart2");
+    var menuWidth = sidebar.outerWidth();
+
 
     $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
+        sidebar.toggleClass('active');
         $(this).toggleClass('active');
+        if (!myChart.hasClass('hidden')) {
+
+            var oldWidth = myChart.width();
+            if (sidebar.hasClass('active')) myChart.width(oldWidth + menuWidth);
+            else myChart.width(oldWidth - menuWidth);
+
+        }
+
     });
 
     menuItems.on('click', function (event) {
@@ -28,54 +40,60 @@ jQuery(function () {
 
     //  var dataColumns = JSON.parse(getColumns());
 
+    function setAxisMax(max) {
+
+        customConfig.options.scales.xAxes[0].ticks.max = max;
+
+        new Chart(myChart, customConfig);
+
+
+    }
+
+    var customConfig;
 
     function getDistanceVsRad() {
 
         getColumns().then(res => {
 
-            console.log(res);
             res = JSON.parse(res);
-
             console.log('message', res["message"]);
             var columns = res["data"];
             var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
             var names = columns["pl_name"];
-
             var labels = {
                 x: 'semimajor axis(AU)',
                 y: 'planet radius (Rjup)'
             }
 
-            new Chart(document.getElementById("myChart2"), {
+            var config = {
                 type: 'scatter',
                 data: {
                     datasets: [{
                         label: 'Scatter Dataset',
                         data: dataPlot,
-
                     }]
                 },
-
                 options: {
-
+                    legend: {
+                        display: false
+                    },
                     tooltips: {
                         callbacks: {
-                            label: function (tooltipItem, ) {
-                                var label = names[tooltipItem.index];
-
-                                return label;
+                            label: function (tooltipItem) {
+                                var i = tooltipItem.index;
+                                return names[i]
+                            },
+                            afterLabel: function (tooltipItem, data) {
+                                var item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                return item.x + ' , ' + item.y;
                             }
                         }
-
                     },
                     scales: {
                         xAxes: [{
                             type: 'linear',
                             position: 'bottom',
-
-
                             scaleLabel: {
-
                                 display: true,
                                 labelString: labels.x
                             },
@@ -85,31 +103,42 @@ jQuery(function () {
                                 max: 1.5
                             }
 
-
                         }],
 
                         yAxes: [{
 
                             scaleLabel: {
-
                                 display: true,
                                 labelString: labels.y
                             },
 
                             ticks: {
-
                                 min: 0,
                                 max: 2.5
                             }
                         }]
                     }
                 }
-            });
+            }
+
+            new Chart(myChart, config);
+
+            customConfig = config;
+
         })
     }
 
 
     getDistanceVsRad();
+
+
+
+    // customConfig.xAxes.ticks.max = 2.5;
+
+
+
+    // console.log(chart.xAxes.ticks.max);
+
 });
 
 
