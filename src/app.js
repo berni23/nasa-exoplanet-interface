@@ -40,13 +40,6 @@ jQuery(function () {
 
     //  var dataColumns = JSON.parse(getColumns());
 
-    function setAxisMax(max) {
-        customConfig.options.scales.xAxes[0].ticks.max = max;
-        new Chart(myChart, customConfig);
-    }
-
-    var customConfig;
-
     function getDistanceVsRad() {
         getColumns().then(res => {
             res = JSON.parse(res);
@@ -55,88 +48,22 @@ jQuery(function () {
             var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
             var names = columns["pl_name"];
             var labels = {
-                x: 'semimajor axis(AU)',
+                x: 'semimajor axis (AU)',
                 y: 'planet radius (Rjup)'
             }
 
-            var config = {
-                type: 'scatter',
-                data: {
-                    datasets: [{
-                        label: 'Scatter Dataset',
-                        data: dataPlot,
-                        backgroundColor: 'blue'
-                    }]
-                },
-                options: {
-                    legend: {
-                        display: false
-                    },
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem) {
-                                var i = tooltipItem.index;
-                                return names[i]
-                            },
-                            afterLabel: function (tooltipItem, data) {
-                                var item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                                return item.x + ' , ' + item.y;
-                            }
-                        }
-                    },
-                    scales: {
-                        xAxes: [{
-                            type: 'linear',
-                            position: 'bottom',
-                            scaleLabel: {
-                                display: true,
-                                labelString: labels.x
-                            },
-
-                            ticks: {
-                                min: 0,
-                                max: 1.4
-
-                                // max: 0.4 //1.5 
-                            }
-
-                        }],
-
-                        yAxes: [{
-                            scaleLabel: {
-                                display: true,
-                                labelString: labels.y
-                            },
-                            ticks: {
-                                min: 0,
-                                max: 2.5
-                            }
-                        }]
-                    }
-                }
-            }
-
-            new Chart(myChart, config);
-            customConfig = config;
-
+            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, labels));
+            new Chart(myChart, myConfig.getConfig());
         })
     }
-
-
     getDistanceVsRad();
 
 
 
     // customConfig.xAxes.ticks.max = 2.5;
-
-
-
     // console.log(chart.xAxes.ticks.max);
 
 });
-
-
-
 
 
 
