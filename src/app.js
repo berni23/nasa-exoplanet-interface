@@ -1,5 +1,5 @@
 jQuery(function () {
-    var menuItems = $('.sidebar-body ul');
+    var menuItems = $('.sidebar-body>ul');
     var sidebar = $('#sidebar');
     var myChart = $("#chart-1");
     var menuWidth = sidebar.outerWidth();
@@ -40,15 +40,12 @@ jQuery(function () {
             console.log('getConfig', config.getConfig());
 
             new Chart($("canvas.active"), config.getConfig());
-
             $("#close-plot-settings").trigger("click");
-
 
         }
 
         // validate changes , implement settings to config object, new chart()
     })
-
 
 
 
@@ -64,7 +61,9 @@ jQuery(function () {
 
     menuItems.on('click', function (event) {
         var target = $(event.target);
-        var dropdown = target.closest('.dropdown');
+        var dropdown = target.closest('.Dropdown');
+
+        console.log(dropdown);
 
         if (dropdown) {
             if (dropdown.hasClass("dropped")) {
@@ -72,8 +71,9 @@ jQuery(function () {
                 dropdown.children(".fa-caret-right").removeClass('hidden');
                 dropdown.next("ul").addClass('hidden');
                 dropdown.removeClass('dropped');
-                console.log(dropdown.find(".fa-caret-down"));
+
             } else {
+
                 dropdown.children(".fa-caret-down").removeClass('hidden');
                 dropdown.children(".fa-caret-right").addClass('hidden');
                 dropdown.next("ul").removeClass('hidden');
@@ -105,8 +105,6 @@ jQuery(function () {
                 x: 'semimajor axis (AU)',
                 y: 'planet radius (Rjup)'
             }
-
-
             var title = "Distance to the star vs planet radius";
             var legend = "Confirmed exoplanets"
             var id = myChart.attr('id');

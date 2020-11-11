@@ -19,7 +19,8 @@ body {
     padding: 0;
     width: 100% !important;
     height: 100% !important;
-    font-family: sans-serif !important;
+    font-family: 'Montserrat', sans-serif !important;
+
 }
 
 ul {
@@ -64,14 +65,14 @@ ul {
 }
 
 .dropdownMenu li {
-    font-size: .9rem !important;
+    font-size: .9em !important;
     padding: 10px !important;
 
 }
 
 .sidebar-body li {
     padding: 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .sidebar-body span {
@@ -171,13 +172,32 @@ ul {
 }
 
 
+
 .about-plot {
     margin-left: 10px;
 }
 
+.plot-settings {
+
+    display: flex !important;
+}
+
+.plot-settings button {
 
 
+    outline-style: none !important;
+    outline: none !important;
+}
 
+.fa-cog {
+
+    margin-top: 3px !important;
+}
+
+.label-sort-by {
+
+    margin-bottom: 3px;
+}
 
 /* modal plot settings */
 
@@ -296,5 +316,21 @@ ul {
     padding: 0 5px;
     background-color: #e9a9be;
 
-    /*padding: 5px;*/
+}
+
+.dropdown-toggle::after {
+
+    visibility: hidden;
+
+}
+
+.dropdown-menu,
+.dropdownMenu {
+    font-size: 0.7em;
+
+}
+
+.dropdownMenu {
+
+    font-size: 0.85em !important;
 }
