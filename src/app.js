@@ -4,6 +4,10 @@ jQuery(function () {
     var myChart = $("#myChart2");
     var menuWidth = sidebar.outerWidth();
 
+    var btnPlotSettings = $(".plot-settings");
+
+    btnPlotSettings.trigger("click");
+
 
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
@@ -11,7 +15,6 @@ jQuery(function () {
         if (!myChart.hasClass('hidden')) {
 
             if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
-
             else myChart.width(`-=${menuWidth}`);
 
 

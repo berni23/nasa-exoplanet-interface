@@ -5,17 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-        integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+    <!--node modules-->
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/chart.js/dist/Chart.js"></script>
+
+    <!--url links-->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        crossorigin="anonymous">
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous">
     </script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
-    <script src="node_modules/chart.js/dist/Chart.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+
+
+    <!-- local code -->
     <link rel="stylesheet" href="app.css" />
     <script src="src/data.js"></script>
     <script src="src/customCharts.js"></script>
@@ -41,7 +57,7 @@
                         </li>
 
                         <ul class="dropdownMenu hidden">
-                            <li>extra item1</li>
+                            <li>star distance vs planet radius</li>
                             <li>extra item2</li>
                         </ul>
 
@@ -61,7 +77,7 @@
                         </li>
 
                         <ul class="dropdownMenu hidden">
-                            <li>extra item1</li>
+                            <li>What are exoplanets?</li>
                             <li>extra item2</li>
                         </ul>
                     </ul>
@@ -76,68 +92,56 @@
                             <span></span>
                         </button>
                         <h2 class="title">Distance to the star vs planet radius</h2>
+                        <div class="plot-settings">
+
+                            </button> <button class="plot-settings btn button-secondary" data-toggle="modal"
+                                data-target="#modal-plot-settings" type="button">
+                                <i class="fas fa-cog"></i></button>
+                            <button class="btn button-secondary" type="button"><i class="fas fa-comment"></i></button>
+                        </div>
                     </div>
                 </nav>
-
                 <!-- <canvas id="myChart"></canvas> -->
                 <canvas id="myChart2"></canvas>
-                <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
-
-                <div class="line"></div>
-
-                <h2>Lorem Ipsum Dolor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
-
-                <div class="line"></div>
-
-                <h2>Lorem Ipsum Dolor</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
-
-                <div class="line"></div>
-
-                <h3>Lorem Ipsum Dolor</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                    et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu
-                    fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.</p>
-            </div> -->
             </main>
+            <!--modals-->
+
+        </div>
+
+        <div class="modal fade" id="modal-plot-settings" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title  mx-auto">Plot custom settings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <ul>
+
+                            <li class="settings-title"><span>axis upper limits</span></li>
+                            <li><span>X-axis : </span><input id="max-x" class="input-axis"></li>
+                            <li><span>Y-axis : </span><input id="max-y" class="input-axis"></li>
+
+                        </ul>
+                        <ul>
+                            <li class="settings-title">Show or hide</li>
+                            <li> <span>Show legend: </span><input id="bool-legend" type=checkbox></li>
+                            <li><span>Show labels</span> <input id="bool-labels" type="checkbox"></li>
+                            <li><span>Show uncertainty</span> <input id="bool-labels" type="checkbox"></li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id='editFileBtn'>rename</button>
+                        <button type="button" id="close-edit" class="btn btn-secondary"
+                            data-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
-
 
     <script type='module' src="src/app.js" defer></script>
 

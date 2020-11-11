@@ -122,18 +122,6 @@ ul {
 
 
 
-
-/* ---------------------------------------------------
-    CONTENT STYLE
------------------------------------------------------ */
-#content {
-    width: 100%;
-    padding: 20px;
-    min-height: 100vh;
-    transition: all 0.3s;
-    overflow: auto;
-}
-
 #sidebarCollapse {
     width: 40px;
     height: 40px;
@@ -170,6 +158,66 @@ ul {
     margin: 5px auto;
 }
 
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+    overflow: auto;
+}
+
+
+.about-plot {
+    margin-left: 10px;
+}
+
+
+
+
+/* modal plot settings */
+
+
+
+.input-axis {
+    width: 50px;
+}
+
+#modal-plot-settings {
+    font-size: .8rem;
+}
+
+.modal .modal-body {
+
+    margin-left: 30px;
+    display: flex;
+
+}
+
+.modal .modal-body ul {
+
+    margin-left: 40px;
+}
+
+.modal .modal-body li {
+
+    margin-top: 10px;
+    width: 120px;
+}
+
+.modal .modal-body li input {
+
+    float: right;
+}
+
+.settings-title {
+
+    font-weight: bold;
+    margin-bottom: 20px !important;
+}
 
 /* ---------------------------------------------------
     MEDIAQUERIES

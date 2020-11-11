@@ -60,9 +60,6 @@ nav {
     z-index: 3;
 }
 
-
-
-
 .main {
     z-index: 3;
 }
@@ -73,8 +70,6 @@ nav {
     margin: auto !important;
 
 }
-
-
 
 .options {
     text-align: center;
@@ -106,8 +101,6 @@ nav {
     cursor: pointer !important;
     transition: all 0.5s linear;
 }
-
-
 
 .option-selected {
     border-bottom: 1px solid red !important;
@@ -235,7 +228,6 @@ nav {
     -webkit-animation: move-twink-back 200s linear infinite;
     animation: move-twink-back 200s linear infinite;
 }
-
 
 .hidden {
 
