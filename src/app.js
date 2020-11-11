@@ -13,7 +13,6 @@ jQuery(function () {
     var showLegend = $("#bool-legend");
     var showLabels = $("#bool-labels");
     var showUncertainty = $("#bool-uncertainty");
-
     var configObject = {}
 
     // btnPlotSettings.trigger("click");
@@ -32,23 +31,13 @@ jQuery(function () {
         var inputs = [max_x, max_y];
 
         if (validateLoop(inputs, conditions, errors)) {
-
             var config = configObject[$("canvas.active").attr('id')];
             setSettingsToConfig(config);
-
-            console.log('configChart', config);
-            console.log('getConfig', config.getConfig());
-
             new Chart($("canvas.active"), config.getConfig());
             $("#close-plot-settings").trigger("click");
-
         }
-
         // validate changes , implement settings to config object, new chart()
     })
-
-
-
 
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
@@ -62,9 +51,6 @@ jQuery(function () {
     menuItems.on('click', function (event) {
         var target = $(event.target);
         var dropdown = target.closest('.Dropdown');
-
-        console.log(dropdown);
-
         if (dropdown) {
             if (dropdown.hasClass("dropped")) {
                 dropdown.children(".fa-caret-down").addClass('hidden');
@@ -84,18 +70,34 @@ jQuery(function () {
             var id = target.attr("data-chart");
             $(`#${id}`).removeClass('hidden');
             $(`#${id}`).addClass('active');
-
             $("canvas.active").addClass('hidden');
             $("canvas.active").removeClass('active');
 
         }
     })
 
+    $("#menu-group-by").on("click", function (event) {
+
+
+        if ($(event.target) !== $(event.currentTarget)) {
+
+
+            var dataGroup = $(event.target).attr("data-group");
+
+            //  var data = getColumns
+
+        }
+
+    })
+
+
 
     //  var dataColumns = JSON.parse(getColumns());
 
     function getDistanceVsRad() {
-        getColumns().then(res => {
+        fetchDistanceRad().then(res => {
+
+            console.log(res);
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
@@ -120,7 +122,6 @@ jQuery(function () {
         new Chart(element, configChart.getConfig());
         configChart.setId(id);
         configObject[id] = configChart;
-
     }
 
     function setSettingsToModal(configChart) {
@@ -132,17 +133,12 @@ jQuery(function () {
         //var showUncertainty = $("#bool-uncertainty");
     }
 
-
     function setSettingsToConfig(configChart) {
-
         configChart.setMaxX(parseFloat(max_x.val()));
         configChart.setMaxY(parseFloat(max_y.val()));
-
         console.log(showLegend.prop('checked'));
         configChart.setShowLegend(showLegend.prop('checked'));
         configChart.setShowLabels(showLabels.prop('checked'));
-
         return configChart;
-
     }
 });

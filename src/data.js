@@ -9,17 +9,34 @@ async function requestAPI() {
 }
 
 
-async function getColumns() {
-    const res = await fetch('server/viewmodel.php?columns');
+async function fetchDistanceRad() {
+    const res = await fetch('server/viewmodel.php?distance_rad');
     return await res.text();
 
 }
 
 async function getCurrentUser() {
-    const res = await fetch('server/sign.php?user');
+    const res = await fetch('server/viewmodel.php?user');
     return await res.text();
 
 }
+
+async function getColumn(colnames, arrayNames) {
+
+    var data = {
+        name: colnames,
+        levelWith: arrayNames
+
+    }
+    const res = await fetch('server/viewmodel.php?columns', {
+        method: 'POST',
+        body: JSON.stringify(data)
+    });
+    return await res.text();
+}
+
+
+// getColumn(['pl_hostname'], ['pl_radj']).then(res => console.log(res));
 
 
 
