@@ -21,7 +21,7 @@ async function getCurrentUser() {
 
 }
 
-async function getColumn(colnames, arrayNames) {
+async function getColumns(colnames, arrayNames) {
 
     var data = {
         name: colnames,

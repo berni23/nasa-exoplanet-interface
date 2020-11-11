@@ -130,7 +130,8 @@ jQuery(function () {
 
 
 
-    getDistanceVsRad();
+    //getDistanceVsRad();
+    plotDiscMethod();
 
     function setChart(element, configChart, id) {
         var title = configChart.getTitle();
@@ -160,16 +161,12 @@ jQuery(function () {
 
 
     function plotDiscMethod() {
-
-
         getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
 
             console.log(data);
             data = JSON.parse(data);
-
             var methods = data["pl_discmethod"];
             var type_methods = (methods.filter(unique))
-            var color_methods = {};
             var datasets = [];
 
             type_methods.forEach((method, i) => {
@@ -183,31 +180,30 @@ jQuery(function () {
 
                 //   color_methods[method] = 
 
-
             });
-
 
             methods.forEach(function (method, i) {
 
-
                 var j = type_methods.indexOf(method);
 
-                datasets[i]['data'].push({
-                    x: data["pl_orbsmax"][j],
-                    y: data["pl_radj"]
+                datasets[j]['data'].push({
+                    x: data["pl_orbsmax"][i],
+                    y: data["pl_radj"][i]
                 })
 
-
-                datasets[i]['extra']
-
+                datasets[j]['extra'].push(data["pl_hostname"][i]);
 
             })
 
 
+            var config = new ConfigChart(getDefaultConfig())
 
+            config.setId('chart-1-1');
+            config.setDataset(datasets);
+            config.setLabels('semimajor axis (AU)', 'planet radius (Rjup)');
+            configObject['chart-1-1'] = config;
 
-
-
+            new Chart(config, $('#chart-1-1'));
 
         })
 
