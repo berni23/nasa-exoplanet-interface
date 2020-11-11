@@ -77,19 +77,30 @@ jQuery(function () {
     })
 
     $("#menu-group-by").on("click", function (event) {
-
-
         if ($(event.target) !== $(event.currentTarget)) {
 
 
-            var dataGroup = $(event.target).attr("data-group");
+            var dataChart = $(event.target).attr("data-chart");
 
-            //  var data = getColumns
+
+            if (!configObject[dataChart]) {
+
+
+                switch (dataChart) {
+
+
+                    case "chart-1-1": {
+
+                        plotDiscMethod()
+                    }
+                }
+
+
+            }
 
         }
 
     })
-
 
 
     //  var dataColumns = JSON.parse(getColumns());
@@ -97,11 +108,12 @@ jQuery(function () {
     function getDistanceVsRad() {
         fetchDistanceRad().then(res => {
 
-            console.log(res);
+            // console.log(res);
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
             var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
+            console.log(dataPlot);
             var names = columns["pl_name"];
             var labels = {
                 x: 'semimajor axis (AU)',
@@ -114,6 +126,10 @@ jQuery(function () {
             setChart(myChart, myConfig, id);
         })
     }
+
+
+
+
     getDistanceVsRad();
 
     function setChart(element, configChart, id) {
@@ -140,5 +156,64 @@ jQuery(function () {
         configChart.setShowLegend(showLegend.prop('checked'));
         configChart.setShowLabels(showLabels.prop('checked'));
         return configChart;
+    }
+
+
+    function plotDiscMethod() {
+
+
+        getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
+
+            console.log(data);
+            data = JSON.parse(data);
+
+            var methods = data["pl_discmethod"];
+            var type_methods = (methods.filter(unique))
+            var color_methods = {};
+            var datasets = [];
+
+            type_methods.forEach((method, i) => {
+
+                datasets.push({});
+
+                datasets[i]['data'] = [];
+                datasets[i]['backgroundColor'] = getRandomColor();
+                datasets[i]['label'] = method;
+                datasets[i]['extra'] = [];
+
+                //   color_methods[method] = 
+
+
+            });
+
+
+            methods.forEach(function (method, i) {
+
+
+                var j = type_methods.indexOf(method);
+
+                datasets[i]['data'].push({
+                    x: data["pl_orbsmax"][j],
+                    y: data["pl_radj"]
+                })
+
+
+                datasets[i]['extra']
+
+
+            })
+
+
+
+
+
+
+
+        })
+
+
+
+
+
     }
 });

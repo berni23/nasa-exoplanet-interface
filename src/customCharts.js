@@ -24,6 +24,7 @@
 */
 
 
+
 class ConfigChart {
     constructor(config, title) {
         this.config = config;
@@ -144,15 +145,16 @@ class ConfigChart {
 function getConfigExoplanets(dataPlot = null, names = null, labels = {
     x: null,
     y: null
-}, legend = 'Scatter dataset') {
+}, legend = 'Scatter dataset', color = "blue") {
     return {
         type: 'scatter',
         data: {
             datasets: [{
                 label: legend,
                 data: dataPlot,
-                backgroundColor: 'blue',
-                extra: names
+                backgroundColor: color,
+                extra: names,
+                display: false
             }]
         },
         options: {
@@ -162,7 +164,6 @@ function getConfigExoplanets(dataPlot = null, names = null, labels = {
             tooltips: {
                 callbacks: {
                     label: function (tooltipItem, data) {
-                        var i = tooltipItem.index;
                         return data.datasets[tooltipItem.datasetIndex].extra[tooltipItem.index]
                     },
                     afterLabel: function (tooltipItem, data) {
@@ -208,6 +209,20 @@ function setAxisMax(max) {
     new Chart(myChart, customConfig);
 }
 
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+
+function unique(value, index, self) {
+    return self.indexOf(value) === index;
+}
 
 
 

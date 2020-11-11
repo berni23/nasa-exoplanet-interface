@@ -20,6 +20,8 @@ function writeCSV($path, $data, $header, $option = 'w')
     return $response;
 };
 
+
+//general method for obtaining n columns excluding points where one of the m column is null at that point"
 function getColumns($colname, $arrayNames = [], $path)
 {
 
