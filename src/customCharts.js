@@ -1,7 +1,36 @@
+/*class ConfigStorage {
+
+
+    constructor() {
+        this.configList = {};
+        this.dataList = {};
+    }
+
+
+    getConfig(id) {
+        return this.configList[id];
+    }
+
+    setConfig(id, config) {
+        this.configList[id] = config;
+    }
+
+    getConfigList() {
+        return this.configList;
+    }
+
+}
+
+*/
+
+
+
 class ConfigChart {
-    constructor(config) {
+    constructor(config, title) {
         this.config = config;
         this.names;
+        this.id;
+        this.title = title;
     }
     getDataX() {
         return this.config.data.datasets.data[0]
@@ -45,9 +74,6 @@ class ConfigChart {
     setConfig(config) {
         this.config = config;
     }
-    displayLegend(bool) {
-        this.config.options.legend.display = bool;
-    }
     getNames() {
         return this.names;
     }
@@ -64,14 +90,43 @@ class ConfigChart {
         this.config.type = type
     }
     setLabels(xLabel, yLabel) {
-        this.config.options.scales.xAxes.scaleLabel.labelString = xLabel;
-        this.config.options.scales.yAxes.scaleLabel.labelString = yLabel;
+        this.config.options.scales.xAxes[0].scaleLabel.labelString = xLabel;
+        this.config.options.scales.yAxes[0].scaleLabel.labelString = yLabel;
+    }
+    getTitle() {
+        return this.title
+    }
+    setTitle(title) {
+        this.title = title;
+    }
+    getId() {
+        return this.id;
+    }
+    setId(id) {
+        this.id = id;
     }
 
-    displayLabels(bool) {
-        this.config.options.scales.xAxes.scaleLabel.display = bool;
-        this.config.options.scales.yAxes.scaleLabel.display = bool;
+    getShowLabels() {
+
+        var x = this.config.options.scales.xAxes[0].scaleLabel.display;
+        var y = this.config.options.scales.yAxes[0].scaleLabel.display;
+
+        return (x && y);
     }
+    showLabels(bool) {
+        this.config.options.scales.xAxes[0].scaleLabel.display = bool;
+        this.config.options.scales.yAxes[0].scaleLabel.display = bool;
+    }
+
+    getShowLegend() {
+
+        return this.config.options.legend.display;
+    }
+    showLegend(bool) {
+        this.config.options.legend.display = bool;
+    }
+    showUncertainty(bool) {}
+    setUncertainty(bool) {}
 }
 
 
@@ -94,7 +149,7 @@ function getConfigExoplanets(dataPlot = null, names = null, labels = {
         },
         options: {
             legend: {
-                display: false
+                display: true
             },
             tooltips: {
                 callbacks: {

@@ -57,7 +57,7 @@
                         </li>
 
                         <ul class="dropdownMenu hidden">
-                            <li>star distance vs planet radius</li>
+                            <li class="my-content" {} data-chart="chart-1">star distance vs planet radius</li>
                             <li>extra item2</li>
                         </ul>
 
@@ -91,7 +91,7 @@
                             <span></span>
                             <span></span>
                         </button>
-                        <h2 class="title">Distance to the star vs planet radius</h2>
+                        <h3 id="plot-title" class="title">Distance to the star vs planet radius</h3>
                         <div class="plot-settings">
 
                             </button> <button class="plot-settings btn button-secondary" data-toggle="modal"
@@ -102,12 +102,10 @@
                     </div>
                 </nav>
                 <!-- <canvas id="myChart"></canvas> -->
-                <canvas id="myChart2"></canvas>
+                <canvas id="chart-1" class="active"></canvas>
             </main>
             <!--modals-->
-
         </div>
-
         <div class="modal fade" id="modal-plot-settings" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -118,24 +116,22 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
                         <ul>
-
                             <li class="settings-title"><span>axis upper limits</span></li>
                             <li><span>X-axis : </span><input id="max-x" class="input-axis"></li>
                             <li><span>Y-axis : </span><input id="max-y" class="input-axis"></li>
-
                         </ul>
                         <ul>
                             <li class="settings-title">Show or hide</li>
                             <li> <span>Show legend: </span><input id="bool-legend" type=checkbox></li>
                             <li><span>Show labels</span> <input id="bool-labels" type="checkbox"></li>
-                            <li><span>Show uncertainty</span> <input id="bool-labels" type="checkbox"></li>
+                            <li><span>Show uncertainty</span> <input id="bool-uncertainty" type="checkbox"></li>
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id='editFileBtn'>rename</button>
-                        <button type="button" id="close-edit" class="btn btn-secondary"
+                        <button type="button" data-dismiss="modal" class="btn btn-primary"
+                            id='edit-plot-settings'>apply</button>
+                        <button type="button" id="close-plot-settings" class="btn btn-secondary"
                             data-dismiss="modal">cancel</button>
                     </div>
                 </div>

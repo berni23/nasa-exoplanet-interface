@@ -1,28 +1,52 @@
 jQuery(function () {
     var menuItems = $('.sidebar-body ul');
     var sidebar = $('#sidebar');
-    var myChart = $("#myChart2");
+    var myChart = $("#chart-1");
     var menuWidth = sidebar.outerWidth();
-
     var btnPlotSettings = $(".plot-settings");
+    var plotTitle = $("#plot-title");
 
-    btnPlotSettings.trigger("click");
 
+    // input settngs
+
+    var max_x = $("#max-x");
+    var max_y = $("#max-y");
+    var showLegend = $("#bool-legend");
+    var showLabels = $("#bool-labels");
+    var showUncertainty = $("#bool-uncertainty");
+
+    var configObject = {}
+
+
+    // btnPlotSettings.trigger("click");
+
+    btnPlotSettings.on("click", function () {
+
+        var id = $("canvas.active").attr('id');
+
+        console.log('configObject', configObject);
+        console.log('id', id);
+        setSettings(configObject[id]);
+
+    })
+    $("#edit-plot-settings").on("click", function () {
+
+
+        // validate changes , implement settings to config object, new chart()
+    })
 
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
         $(this).toggleClass('active');
         if (!myChart.hasClass('hidden')) {
-
             if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
             else myChart.width(`-=${menuWidth}`);
-
-
         }
     });
 
     menuItems.on('click', function (event) {
-        var dropdown = $(event.target).closest('.dropdown');
+        var target = $(event.target);
+        var dropdown = target.closest('.dropdown');
 
         if (dropdown) {
             if (dropdown.hasClass("dropped")) {
@@ -37,6 +61,15 @@ jQuery(function () {
                 dropdown.next("ul").removeClass('hidden');
                 dropdown.addClass('dropped');
             }
+        } else if (target.hasClass("my-content") && !target.hasClass("active")) {
+            target.addClass("content-active"); // blueish color on click
+            var id = target.attr("data-chart");
+            $(`#${id}`).removeClass('hidden');
+            $(`#${id}`).addClass('active');
+
+            $("canvas.active").addClass('hidden');
+            $("canvas.active").removeClass('active');
+
         }
     })
 
@@ -48,6 +81,7 @@ jQuery(function () {
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
+
             var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
             var names = columns["pl_name"];
             var labels = {
@@ -55,59 +89,33 @@ jQuery(function () {
                 y: 'planet radius (Rjup)'
             }
 
-            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, labels));
-            new Chart(myChart, myConfig.getConfig());
+            var title = "Distance to the star vs planet radius";
+            var id = myChart.attr('id');
+            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, labels), title, id);
+            setChart(myChart, myConfig, id);
         })
     }
     getDistanceVsRad();
 
+    function setChart(element, configChart, id) {
+        var title = configChart.getTitle();
+        plotTitle.text(title);
+        new Chart(element, configChart.getConfig());
+        configChart.setId(id);
+        configObject[id] = configChart;
+
+    }
+
+    function setSettings(configChart) {
+
+        console.log('config:', configChart);
+        max_x.val(configChart.getMaxX());
+        max_y.val(configChart.getMaxY());
+        showLegend.prop('checked', configChart.getShowLegend());
+        showLabels.prop('checked', configChart.getShowLabels());
+        //var showUncertainty = $("#bool-uncertainty");
 
 
-    // customConfig.xAxes.ticks.max = 2.5;
-    // console.log(chart.xAxes.ticks.max);
 
+    }
 });
-
-
-
-
-
-//function formatData(dataX,dataY){}
-
-// requestAPI().then(getColumns());
-
-// Bar chart
-/* new Chart(document.getElementById("myChart"), {
-     type: 'bar',
-     data: {
-         labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-         datasets: [{
-             label: "Population (millions)",
-             backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
-             data: [2478, 5267, 734, 784, 433]
-         }]
-     },
-     options: {
-         legend: {
-             display: false
-         },
-         title: {
-             display: true,
-             text: 'Predicted world population (millions) in 2050'
-         }
-     }
- });
-
-  data: [{
-  x: -10,
-  y: 0
-  }, {
-  x: 0,
-  y: 10
-  }, {
-  x: 10,
-  y: 5
-  }]
-  }]
-
- */
