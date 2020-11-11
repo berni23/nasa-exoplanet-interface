@@ -24,49 +24,50 @@
 */
 
 
-
 class ConfigChart {
     constructor(config, title) {
         this.config = config;
-        this.names;
         this.id;
         this.title = title;
     }
     getDataX() {
         return this.config.data.datasets.data[0]
     }
-    setDataX(dataX) {
-        this.config.data.datasets.data[0] = dataX;
+    setData(data, i = 0) {
+        this.config.data.datasets[i].data = data;
     }
-    getDataY() {
-        return this.config.data.datasets.data[1];
+    setDataX(dataX, i = 0) {
+        this.config.data.datasets[i].data[0] = dataX;
     }
-    setDataY(dataY) {
-        this.config.data.datasets.data[1] = dataY;
+    getDataY(i = 0) {
+        return this.config.data.datasets[i].data[1];
     }
-    getMaxY() {
-        return this.config.options.scales.yAxes[0].ticks.max;
+    setDataY(dataY, i = 0) {
+        this.config.data.datasets[i].data[1] = dataY;
     }
-    setMaxY(maxY) {
-        this.config.options.scales.yAxes[0].ticks.max = maxY;
+    getMaxY(i = 0) {
+        return this.config.options.scales.yAxes[i].ticks.max;
     }
-    getMaxX() {
-        return this.config.options.scales.xAxes[0].ticks.max;
+    setMaxY(maxY, i = 0) {
+        this.config.options.scales.yAxes[i].ticks.max = maxY;
     }
-    setMaxX(maxX) {
-        this.config.options.scales.xAxes[0].ticks.max = maxX;
+    getMaxX(i = 0) {
+        return this.config.options.scales.xAxes[i].ticks.max;
     }
-    getTypeX() {
-        return this.config.scales.xAxes[0].type;
+    setMaxX(maxX, i = 0) {
+        this.config.options.scales.xAxes[i].ticks.max = maxX;
     }
-    setTypeX(type) {
-        this.config.scales.xAxes[0].type = type;
+    getTypeX(i = 0) {
+        return this.config.scales.xAxes[i].type;
     }
-    getTypeY() {
-        return this.config.scales.yAxes[0].type;
+    setTypeX(type, i = 0) {
+        this.config.scales.xAxes[i].type = type;
     }
-    setTypeY(type) {
-        this.config.scales.yAxes[0].type = type;
+    getTypeY(i = 0) {
+        return this.config.scales.yAxes[i].type;
+    }
+    setTypeY(type, i = 0) {
+        this.config.scales.yAxes[i].type = type;
     }
     getConfig() {
         return this.config;
@@ -77,11 +78,11 @@ class ConfigChart {
     getNames() {
         return this.names;
     }
-    setNames(names) {
-        this.names = names
+    setNames(names, i = 0) {
+        this.config.data.datasets[i].extra = names
     }
-    getNames() {
-        return this.names
+    getNames(i = 0) {
+        return this.config.data.datasets[i].extra
     }
     getType() {
         return this.config.type
@@ -89,9 +90,9 @@ class ConfigChart {
     setType(type) {
         this.config.type = type
     }
-    setLabels(xLabel, yLabel) {
-        this.config.options.scales.xAxes[0].scaleLabel.labelString = xLabel;
-        this.config.options.scales.yAxes[0].scaleLabel.labelString = yLabel;
+    setLabels(xLabel, yLabel, i = 0) {
+        this.config.options.scales.xAxes[i].scaleLabel.labelString = xLabel;
+        this.config.options.scales.yAxes[i].scaleLabel.labelString = yLabel;
     }
     getTitle() {
         return this.title
@@ -105,16 +106,21 @@ class ConfigChart {
     setId(id) {
         this.id = id;
     }
-    getShowLabels() {
-        var x = this.config.options.scales.xAxes[0].scaleLabel.display;
-        var y = this.config.options.scales.yAxes[0].scaleLabel.display;
+    getLegend(i = 0) {
+        return this.config.data.datasets[i].label
+    }
+    setLegend(label, i = 0) {
+        this.config.data.datasets[i].label = label;
+    }
+    getShowLabels(i = 0) {
+        var x = this.config.options.scales.xAxes[i].scaleLabel.display;
+        var y = this.config.options.scales.yAxes[i].scaleLabel.display;
         return (x && y);
     }
-    setShowLabels(bool) {
-        this.config.options.scales.xAxes[0].scaleLabel.display = bool;
-        this.config.options.scales.yAxes[0].scaleLabel.display = bool;
+    setShowLabels(bool, i = 0) {
+        this.config.options.scales.xAxes[i].scaleLabel.display = bool;
+        this.config.options.scales.yAxes[i].scaleLabel.display = bool;
     }
-
     getShowLegend() {
         return this.config.options.legend.display;
     }
@@ -123,8 +129,14 @@ class ConfigChart {
     }
     showUncertainty(bool) {}
     setUncertainty(bool) {}
-}
 
+    setColor(color, i = 0) {
+        this.config.data.datasets[i].backgroundColor = color;
+    }
+    getColor(i = 0) {
+        return this.config.data.datasets[i].backgroundColor;
+    }
+}
 
 // config file
 
@@ -132,15 +144,15 @@ class ConfigChart {
 function getConfigExoplanets(dataPlot = null, names = null, labels = {
     x: null,
     y: null
-}) {
-
+}, legend = 'Scatter dataset') {
     return {
         type: 'scatter',
         data: {
             datasets: [{
-                label: 'Scatter Dataset',
+                label: legend,
                 data: dataPlot,
-                backgroundColor: 'blue'
+                backgroundColor: 'blue',
+                extra: names
             }]
         },
         options: {
@@ -149,9 +161,9 @@ function getConfigExoplanets(dataPlot = null, names = null, labels = {
             },
             tooltips: {
                 callbacks: {
-                    label: function (tooltipItem) {
+                    label: function (tooltipItem, data) {
                         var i = tooltipItem.index;
-                        return names[i]
+                        return data.datasets[tooltipItem.datasetIndex].extra[tooltipItem.index]
                     },
                     afterLabel: function (tooltipItem, data) {
                         var item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
@@ -173,7 +185,6 @@ function getConfigExoplanets(dataPlot = null, names = null, labels = {
                         max: 0.75
                         // max: 0.4 //1.5 
                     }
-
                 }],
 
                 yAxes: [{

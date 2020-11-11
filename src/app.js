@@ -99,7 +99,6 @@ jQuery(function () {
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
-
             var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
             var names = columns["pl_name"];
             var labels = {
@@ -107,9 +106,11 @@ jQuery(function () {
                 y: 'planet radius (Rjup)'
             }
 
+
             var title = "Distance to the star vs planet radius";
+            var legend = "Confirmed exoplanets"
             var id = myChart.attr('id');
-            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, labels), title, id);
+            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, labels, legend), title, id);
             setChart(myChart, myConfig, id);
         })
     }
