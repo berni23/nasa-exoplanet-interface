@@ -6,7 +6,6 @@ jQuery(function () {
     var btnPlotSettings = $(".plot-settings");
     var plotTitle = $("#plot-title");
 
-
     // input settngs
 
     var max_x = $("#max-x");
@@ -17,23 +16,42 @@ jQuery(function () {
 
     var configObject = {}
 
-
     // btnPlotSettings.trigger("click");
 
     btnPlotSettings.on("click", function () {
-
+        clearErrors();
         var id = $("canvas.active").attr('id');
-
-        console.log('configObject', configObject);
-        console.log('id', id);
-        setSettings(configObject[id]);
-
+        setSettingsToModal(configObject[id]);
     })
     $("#edit-plot-settings").on("click", function () {
 
+        var regex = /(?<=^|)\d+\.\d+(?=$|)/;
+        var error = 'only numbers with decimals';
+        var conditions = [regex, regex];
+        var errors = [error, error];
+        var inputs = [max_x, max_y];
+
+        if (validateLoop(inputs, conditions, errors)) {
+
+            var config = configObject[$("canvas.active").attr('id')];
+            setSettingsToConfig(config);
+
+            console.log('configChart', config);
+            console.log('getConfig', config.getConfig());
+
+            new Chart($("canvas.active"), config.getConfig());
+
+            $("#close-plot-settings").trigger("click");
+
+
+        }
 
         // validate changes , implement settings to config object, new chart()
     })
+
+
+
+
 
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
@@ -106,16 +124,26 @@ jQuery(function () {
 
     }
 
-    function setSettings(configChart) {
-
+    function setSettingsToModal(configChart) {
         console.log('config:', configChart);
         max_x.val(configChart.getMaxX());
         max_y.val(configChart.getMaxY());
         showLegend.prop('checked', configChart.getShowLegend());
         showLabels.prop('checked', configChart.getShowLabels());
         //var showUncertainty = $("#bool-uncertainty");
+    }
 
 
+    function setSettingsToConfig(configChart) {
+
+        configChart.setMaxX(parseFloat(max_x.val()));
+        configChart.setMaxY(parseFloat(max_y.val()));
+
+        console.log(showLegend.prop('checked'));
+        configChart.setShowLegend(showLegend.prop('checked'));
+        configChart.setShowLabels(showLabels.prop('checked'));
+
+        return configChart;
 
     }
 });

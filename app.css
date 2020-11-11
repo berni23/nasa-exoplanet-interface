@@ -178,6 +178,7 @@ ul {
 
 
 
+
 /* modal plot settings */
 
 
@@ -265,7 +266,6 @@ ul {
 }
 
 
-
 /** CHARTS**/
 
 
@@ -282,3 +282,19 @@ ul {
     max-width: 700px !important;
 }
 */
+
+
+
+
+/* UTILS */
+
+
+.error-msg {
+
+    font-size: 0.65rem;
+    margin-top: 10px;
+    padding: 0 5px;
+    background-color: #e9a9be;
+
+    /*padding: 5px;*/
+}

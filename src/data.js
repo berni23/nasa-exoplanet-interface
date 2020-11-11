@@ -23,8 +23,6 @@ async function getCurrentUser() {
 
 
 
-
-
 function dataScatter(dataX, dataY) {
     var data = dataX.map(function (x, i) {
         return {

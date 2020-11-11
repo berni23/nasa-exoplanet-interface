@@ -105,24 +105,20 @@ class ConfigChart {
     setId(id) {
         this.id = id;
     }
-
     getShowLabels() {
-
         var x = this.config.options.scales.xAxes[0].scaleLabel.display;
         var y = this.config.options.scales.yAxes[0].scaleLabel.display;
-
         return (x && y);
     }
-    showLabels(bool) {
+    setShowLabels(bool) {
         this.config.options.scales.xAxes[0].scaleLabel.display = bool;
         this.config.options.scales.yAxes[0].scaleLabel.display = bool;
     }
 
     getShowLegend() {
-
         return this.config.options.legend.display;
     }
-    showLegend(bool) {
+    setShowLegend(bool) {
         this.config.options.legend.display = bool;
     }
     showUncertainty(bool) {}

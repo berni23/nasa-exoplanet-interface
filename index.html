@@ -26,18 +26,15 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous">
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
-    </script>
-
 
     <!-- local code -->
     <link rel="stylesheet" href="app.css" />
     <script src="src/data.js"></script>
     <script src="src/customCharts.js"></script>
+    <script src="src/validate.js"></script>
 
 
-    <title>Document</title>
+    <title>Exoplanet data interface</title>
 </head>
 
 <body>
@@ -57,7 +54,7 @@
                         </li>
 
                         <ul class="dropdownMenu hidden">
-                            <li class="my-content" {} data-chart="chart-1">star distance vs planet radius</li>
+                            <li class="my-content" data-chart="chart-1">star distance vs planet radius</li>
                             <li>extra item2</li>
                         </ul>
 
@@ -129,8 +126,7 @@
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" class="btn btn-primary"
-                            id='edit-plot-settings'>apply</button>
+                        <button type="button" class="btn btn-primary" id='edit-plot-settings'>apply</button>
                         <button type="button" id="close-plot-settings" class="btn btn-secondary"
                             data-dismiss="modal">cancel</button>
                     </div>
