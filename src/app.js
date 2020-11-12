@@ -35,7 +35,9 @@ jQuery(function () {
         setSettingsToModal(configObject[id]);
     })
     $("#edit-plot-settings").on("click", function () {
-        var regex = /(?<=^|)\d+\.\d+(?=$|)/;
+        //var regex = /(?<=^|)\d+\.\d+(?=$|)/;
+
+        var regex = /^\d+(\.\d+)*$/
         var error = 'only numbers with decimals';
         var conditions = [regex, regex];
         var errors = [error, error];
@@ -43,37 +45,14 @@ jQuery(function () {
 
         if (validateLoop(inputs, conditions, errors)) {
             var id = $("canvas.active").attr('id');
-
             var config = configObject[id];
             setSettingsToConfig(config);
-            //  var newCanvas = resetCanvas($("canvas.active"));
-
             chartObject[id].destroy();
-
-            $('.chartjs-size-monitor').remove();
-            $("canvas-active").removeClass('chartjs-render-monitor');
             chartObject[id] = new Chart($("canvas.active"), config.getConfig());
             $("#close-plot-settings").trigger("click");
         }
-        // validate changes , implement settings to config object, new chart()
+
     })
-
-    // function resetCanvas(canvas) {
-    //     var newCanvas = $('<canvas>');
-    //     //newCanvas.attr('class', canvas.attr('class'));
-    //     newCanvas.addClass('active');
-
-    //     var id = canvas.attr("id");
-    //     canvas.attr("id", "temp");
-    //     newCanvas.attr("id", id);
-
-
-    //     newCanvas.after(canvas);
-    //     // $('.chartjs-size-monitor').remove();
-    //     $('#temp').remove();
-    //     console.log('the new canvas', canvas);
-    //     return newCanvas}
-
 
 
     $('#sidebarCollapse').on('click', function () {
