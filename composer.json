@@ -1,0 +1,6 @@
+{
+    "name": "berni/develop_your_project_php",
+    "require": {
+        "fzaninotto/faker": "^1.9"
+    }
+}
