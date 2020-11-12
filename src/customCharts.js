@@ -41,22 +41,16 @@
 
 
 class ConfigChart {
-    constructor(config, title) {
+    constructor(config, title = "") {
         this.config = config;
-        this.id;
         this.title = title;
     }
-
-
     setDataset(datasets) {
-
         this.config.data.datasets = datasets
     }
-
     setData(data, i = 0) {
         this.config.data.datasets[i].data = data;
     }
-
     getMaxY(i = 0) {
         return this.config.options.scales.yAxes[i].ticks.max;
     }
@@ -153,66 +147,73 @@ class ConfigChart {
 // config file
 
 
-function getConfigExoplanets(dataPlot = null, names = null, labels = {
-    x: null,
-    y: null
-}, legend = 'Scatter dataset', color = "blue") {
-    return {
-        type: 'scatter',
-        data: {
-            datasets: [{
-                label: legend,
-                data: dataPlot,
-                backgroundColor: color,
-                extra: names
+function getConfigExoplanets(dataPlot = null, names = null, legend = 'Scatter dataset', color = "blue") {
+    var config = getDefaultConfig();
+    config.datasets = [{
+        label: legend,
+        data: dataPlot,
+        backgroundColor: color,
+        extra: names
+    }]
+    return config
+}
 
-            }]
+/*return {
+    type: 'scatter',
+    data: {
+        datasets: [{
+            label: legend,
+            data: dataPlot,
+            backgroundColor: color,
+            extra: names
+
+        }]
+    },
+    options: {
+        legend: {
+            display: true
         },
-        options: {
-            legend: {
-                display: true
-            },
-            tooltips: {
-                callbacks: {
-                    label: function (tooltipItem, data) {
-                        return data.datasets[tooltipItem.datasetIndex].extra[tooltipItem.index]
-                    },
-                    afterLabel: function (tooltipItem, data) {
-                        var item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                        return item.x + ' , ' + item.y;
-                    }
+        tooltips: {
+            callbacks: {
+                label: function (tooltipItem, data) {
+                    return data.datasets[tooltipItem.datasetIndex].extra[tooltipItem.index]
+                },
+                afterLabel: function (tooltipItem, data) {
+                    var item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                    return item.x + ' , ' + item.y;
                 }
-            },
-            scales: {
-                xAxes: [{
-                    type: 'linear',
-                    position: 'bottom',
-                    scaleLabel: {
-                        display: true,
-                        labelString: labels.x
-                    },
-
-                    ticks: {
-                        min: 0,
-                        max: 0.75
-                        // max: 0.4 //1.5 
-                    }
-                }],
-
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: labels.y
-                    },
-                    ticks: {
-                        min: 0,
-                        max: 2.5
-                    }
-                }]
             }
+        },
+        scales: {
+            xAxes: [{
+                type: 'linear',
+                position: 'bottom',
+                scaleLabel: {
+                    display: true,
+                    labelString: labels.x
+                },
+
+                ticks: {
+                    min: 0,
+                    max: 0.75
+                    // max: 0.4 //1.5 
+                }
+            }],
+
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: labels.y
+                },
+                ticks: {
+                    min: 0,
+                    max: 2.5
+                }
+            }]
         }
     }
-}
+}*/
+
 
 
 function setAxisMax(max) {
@@ -252,7 +253,6 @@ function unique(value, index, self) {
 
 
 function getDefaultConfig() {
-
     return {
         type: 'scatter',
         data: {},

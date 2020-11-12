@@ -13,9 +13,13 @@ jQuery(function () {
     var showLegend = $("#bool-legend");
     var showLabels = $("#bool-labels");
     var showUncertainty = $("#bool-uncertainty");
-    var configObject = {}
+    var configObject = {};
 
     // btnPlotSettings.trigger("click");
+
+    function initialize() {
+        getDistanceVsRad().then(config => plotChart(config));
+    }
 
     btnPlotSettings.on("click", function () {
         clearErrors();
@@ -23,7 +27,6 @@ jQuery(function () {
         setSettingsToModal(configObject[id]);
     })
     $("#edit-plot-settings").on("click", function () {
-
         var regex = /(?<=^|)\d+\.\d+(?=$|)/;
         var error = 'only numbers with decimals';
         var conditions = [regex, regex];
@@ -57,9 +60,7 @@ jQuery(function () {
                 dropdown.children(".fa-caret-right").removeClass('hidden');
                 dropdown.next("ul").addClass('hidden');
                 dropdown.removeClass('dropped');
-
             } else {
-
                 dropdown.children(".fa-caret-down").removeClass('hidden');
                 dropdown.children(".fa-caret-right").addClass('hidden');
                 dropdown.next("ul").removeClass('hidden');
@@ -72,63 +73,62 @@ jQuery(function () {
             $(`#${id}`).addClass('active');
             $("canvas.active").addClass('hidden');
             $("canvas.active").removeClass('active');
-
         }
     })
 
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
-            var dataChart = $(event.target).attr("data-chart");
-            if (!configObject[dataChart]) {
-                switch (dataChart) {
-                    case "chart-1-1":
-                        plotDiscMethod()
-                        break;
-
+            var id = $(event.target).attr("data-chart");
+            var chart = $(`#${id}`);
+            if (!chart.hasClass('active')) {
+                var config;
+                if (id in configObject) {
+                    config = configObject[id];
+                    plotChart(config);
+                } else {
+                    chart.removeClass('hidden');
+                    chart.addClass('active');
+                    $('canvas.active').addClass('hidden');
+                    switch (dataChart) {
+                        case "chart-1-1":
+                            plotDiscMethod("chart-1-1").then(config => plotChart(config));
+                            break;
+                        case "chart-1":
+                            getDistanceVsRad("chart-1").then(config => plotChart(config));
+                            break;
+                    }
                 }
-
             }
-
         }
-
     })
 
+    function plotChart(config) {
+        new Chart($(`#${id}`), config);
+        plotTitle.text(config.getTitle());
+    }
 
-    //  var dataColumns = JSON.parse(getColumns());
-
-    function getDistanceVsRad() {
+    function getDistanceVsRad(id) {
         fetchDistanceRad().then(res => {
-
-            // console.log(res);
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
             var dataPlot = dataScatter(columns["pl_orbsmax"], columns["pl_radj"]);
-            console.log(dataPlot);
             var names = columns["pl_name"];
             var labels = {
                 x: 'semimajor axis (AU)',
                 y: 'planet radius (Rjup)'
             }
             var title = "Distance to the star vs planet radius";
-            var legend = "Confirmed exoplanets"
-            var id = myChart.attr('id');
-            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, labels, legend), title, id);
-            setChart(myChart, myConfig, id);
+            var legend = "Confirmed exoplanets";
+            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, legend), title);
+            myConfig.setLabels(labels.x, labels.y);
+            myConfig.setId(id);
+            return myConfig;
         })
     }
 
-
     //getDistanceVsRad();
-    plotDiscMethod();
-
-    function setChart(element, configChart, id) {
-        var title = configChart.getTitle();
-        plotTitle.text(title);
-        new Chart(element, configChart.getConfig());
-        configChart.setId(id);
-        configObject[id] = configChart;
-    }
+    //plotDiscMethod();
 
     function setSettingsToModal(configChart) {
         console.log('config:', configChart);
@@ -148,43 +148,41 @@ jQuery(function () {
         return configChart;
     }
 
+    function plotDiscMethod(id) {
 
-    function plotDiscMethod() {
-        getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
+        if (!(id in configObject)) {
+            getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
+                data = JSON.parse(data)['data'];
+                var methods = data["pl_discmethod"];
+                var type_methods = (methods.filter(unique))
+                var datasets = [];
+                type_methods.forEach((method, i) => {
+                    datasets.push({});
+                    datasets[i]['data'] = [];
+                    datasets[i]['backgroundColor'] = getRandomColor();
+                    datasets[i]['label'] = method;
+                    datasets[i]['extra'] = [];
+                });
 
-            data = JSON.parse(data)['data'];
-            var methods = data["pl_discmethod"];
-            var type_methods = (methods.filter(unique))
-            var datasets = [];
-            type_methods.forEach((method, i) => {
-                datasets.push({});
-                datasets[i]['data'] = [];
-                datasets[i]['backgroundColor'] = getRandomColor();
-                datasets[i]['label'] = method;
-                datasets[i]['extra'] = [];
-                //   color_methods[method] = 
-
-            });
-
-            methods.forEach(function (method, i) {
-                var j = type_methods.indexOf(method);
-                datasets[j]['data'].push({
-                    x: data["pl_orbsmax"][i],
-                    y: data["pl_radj"][i]
+                methods.forEach(function (method, i) {
+                    var j = type_methods.indexOf(method);
+                    datasets[j]['data'].push({
+                        x: data["pl_orbsmax"][i],
+                        y: data["pl_radj"][i]
+                    })
+                    datasets[j]['extra'].push(data["pl_hostname"][i]);
                 })
-
-                datasets[j]['extra'].push(data["pl_hostname"][i]);
-
+                var config = new ConfigChart(getDefaultConfig());
+                config.setId(id);
+                config.setDataset(datasets);
+                config.setLabels('semimajor axis (AU)', 'planet radius (Rjup)');
+                config.setTitle("Distance to the star vs planet radius");
+                configObject[id] = config.getConfig();
+                return config
             })
-
-            var config = new ConfigChart(getDefaultConfig())
-            config.setId('chart-1-1');
-            config.setDataset(datasets);
-            config.setLabels('semimajor axis (AU)', 'planet radius (Rjup)');
-            configObject['chart-1-1'] = config.getConfig();
-            new Chart($('#chart-1-1'), config.getConfig());
-
-        })
-
+        } else {
+            var config = configObject[id];
+            return config;
+        }
     }
 });
