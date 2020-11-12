@@ -172,6 +172,9 @@ ul {
 }
 
 
+.content-active {
+    background-color: #6d7fcc;
+}
 
 .about-plot {
     margin-left: 10px;

@@ -149,12 +149,13 @@ class ConfigChart {
 
 function getConfigExoplanets(dataPlot = null, names = null, legend = 'Scatter dataset', color = "blue") {
     var config = getDefaultConfig();
-    config.datasets = [{
+    var datasets = [{
         label: legend,
         data: dataPlot,
         backgroundColor: color,
         extra: names
     }]
+    config.setDataset(datasets);
     return config
 }
 

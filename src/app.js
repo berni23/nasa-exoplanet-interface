@@ -5,6 +5,7 @@ jQuery(function () {
     var menuWidth = sidebar.outerWidth();
     var btnPlotSettings = $(".plot-settings");
     var plotTitle = $("#plot-title");
+    var main = $('main');
 
     // input settngs
 
@@ -18,12 +19,18 @@ jQuery(function () {
     // btnPlotSettings.trigger("click");
 
     function initialize() {
-        getDistanceVsRad().then(config => plotChart(config));
+        getDistanceVsRad('chart-1').then(config => {
+            console.log(config);
+            plotChart(config);
+        })
     }
+
+    initialize();
 
     btnPlotSettings.on("click", function () {
         clearErrors();
         var id = $("canvas.active").attr('id');
+        console.log(configObject);
         setSettingsToModal(configObject[id]);
     })
     $("#edit-plot-settings").on("click", function () {
@@ -35,12 +42,25 @@ jQuery(function () {
 
         if (validateLoop(inputs, conditions, errors)) {
             var config = configObject[$("canvas.active").attr('id')];
-            setSettingsToConfig(config);
+            config = setSettingsToConfig(config);
+            resetCanvas($("canvas-active"))
+
             new Chart($("canvas.active"), config.getConfig());
             $("#close-plot-settings").trigger("click");
         }
         // validate changes , implement settings to config object, new chart()
     })
+
+    function resetCanvas(canvas) {
+
+        newCanvas = document.createElement('canvas');
+        newCanvas.attr('class') = canvas.attr('class');
+        newCanvas.id = canvas.id;
+        canvas.id = 'temp';
+        canvas.remove();
+        newCanvas.after($('#temp'));
+
+    }
 
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
@@ -66,29 +86,36 @@ jQuery(function () {
                 dropdown.next("ul").removeClass('hidden');
                 dropdown.addClass('dropped');
             }
-        } else if (target.hasClass("my-content") && !target.hasClass("active")) {
-            target.addClass("content-active"); // blueish color on click
-            var id = target.attr("data-chart");
+        }
+        if (target.hasClass("my-content") && !target.hasClass("content-active")) {
+
+            console.log('content-active');
+
+            var lastActive = $(".content-active");
+            $(`#${lastActive.attr('data-content')}`).addClass('hidden');
+            lastActive.removeClass("content-active");
+            target.addClass("content-active");
+            var id = target.attr("data-content");
             $(`#${id}`).removeClass('hidden');
-            $(`#${id}`).addClass('active');
-            $("canvas.active").addClass('hidden');
-            $("canvas.active").removeClass('active');
         }
     })
+
+    function showCanvas(id) {
+        $("canvas.active").addClass('hidden');
+        $("canvas.active").removeClass('active');
+        $(`#${id}`).removeClass('hidden');
+        $(`#${id}`).addClass('active');
+    }
+
 
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
             var id = $(event.target).attr("data-chart");
             var chart = $(`#${id}`);
             if (!chart.hasClass('active')) {
-                var config;
-                if (id in configObject) {
-                    config = configObject[id];
-                    plotChart(config);
-                } else {
-                    chart.removeClass('hidden');
-                    chart.addClass('active');
-                    $('canvas.active').addClass('hidden');
+                if (id in configObject) showCanvas(id);
+                else {
+                    showCanvas(id);
                     switch (dataChart) {
                         case "chart-1-1":
                             plotDiscMethod("chart-1-1").then(config => plotChart(config));
@@ -103,12 +130,15 @@ jQuery(function () {
     })
 
     function plotChart(config) {
-        new Chart($(`#${id}`), config);
+        var id = config.getId();
+        $(`#${id}`).empty();
+        new Chart($(`#${id}`), config.getConfig());
         plotTitle.text(config.getTitle());
+        showCanvas(id);
     }
 
     function getDistanceVsRad(id) {
-        fetchDistanceRad().then(res => {
+        return fetchDistanceRad().then(res => {
             res = JSON.parse(res);
             console.log('message', res["message"]);
             var columns = res["data"];
@@ -120,9 +150,21 @@ jQuery(function () {
             }
             var title = "Distance to the star vs planet radius";
             var legend = "Confirmed exoplanets";
-            var myConfig = new ConfigChart(getConfigExoplanets(dataPlot, names, legend), title);
+            var myConfig = new ConfigChart(getDefaultConfig(), title);
+
+            var datasets = [{
+                label: legend,
+                data: dataPlot,
+                backgroundColor: 'blue',
+                extra: names
+            }]
+            myConfig.setDataset(datasets);
             myConfig.setLabels(labels.x, labels.y);
             myConfig.setId(id);
+            console.log(myConfig);
+
+            configObject[id] = myConfig;
+
             return myConfig;
         })
     }
@@ -140,16 +182,19 @@ jQuery(function () {
     }
 
     function setSettingsToConfig(configChart) {
-        configChart.setMaxX(parseFloat(max_x.val()));
-        configChart.setMaxY(parseFloat(max_y.val()));
+
+        var maxX = parseFloat(round(max_x.val()));
+        var maxY = parseFloat(round(max_y.val()));
+        configChart.setMaxX(maxX);
+        configChart.setMaxY(maxY);
         console.log(showLegend.prop('checked'));
         configChart.setShowLegend(showLegend.prop('checked'));
         configChart.setShowLabels(showLabels.prop('checked'));
+
         return configChart;
     }
 
     function plotDiscMethod(id) {
-
         if (!(id in configObject)) {
             getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
                 data = JSON.parse(data)['data'];
@@ -184,5 +229,10 @@ jQuery(function () {
             var config = configObject[id];
             return config;
         }
+    }
+
+    function round(num) {
+
+        return Math.round((num) * 100) / 100
     }
 });

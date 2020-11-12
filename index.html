@@ -53,7 +53,7 @@
                         </li>
 
                         <ul class="dropdownMenu hidden">
-                            <li class="Dropdown my-content" data-chart="chart-1"><span>distance vs planet
+                            <li class="Dropdown my-content" data-content="canvas1"><span>distance vs planet
                                     radius</span>
                                 <i class="caret fa fa-caret-right right"></i>
                                 <i class="caret fa fa-caret-down down hidden"></i>
@@ -128,8 +128,11 @@
                     </div>
                 </nav>
                 <!-- <canvas id="myChart"></canvas> -->
-                <canvas id="chart-1" class="hidden"></canvas>
-                <canvas id="chart-1-1" class="active"></canvas>
+
+                <div id="canvas1" class="canvas-wrapper">
+                    <canvas id="chart-1" class="active"></canvas>
+                    <canvas id="chart-1-1" class="hidden"></canvas>
+                </div>
             </main>
             <!--modals-->
         </div>
