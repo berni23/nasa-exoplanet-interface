@@ -15,6 +15,7 @@ jQuery(function () {
     var showLabels = $("#bool-labels");
     var showUncertainty = $("#bool-uncertainty");
     var configObject = {};
+    var chartObject = {}
 
     // btnPlotSettings.trigger("click");
 
@@ -41,26 +42,39 @@ jQuery(function () {
         var inputs = [max_x, max_y];
 
         if (validateLoop(inputs, conditions, errors)) {
-            var config = configObject[$("canvas.active").attr('id')];
-            config = setSettingsToConfig(config);
-            resetCanvas($("canvas-active"))
+            var id = $("canvas.active").attr('id');
 
-            new Chart($("canvas.active"), config.getConfig());
+            var config = configObject[id];
+            setSettingsToConfig(config);
+            //  var newCanvas = resetCanvas($("canvas.active"));
+
+            chartObject[id].destroy();
+
+            $('.chartjs-size-monitor').remove();
+            $("canvas-active").removeClass('chartjs-render-monitor');
+            chartObject[id] = new Chart($("canvas.active"), config.getConfig());
             $("#close-plot-settings").trigger("click");
         }
         // validate changes , implement settings to config object, new chart()
     })
 
-    function resetCanvas(canvas) {
+    // function resetCanvas(canvas) {
+    //     var newCanvas = $('<canvas>');
+    //     //newCanvas.attr('class', canvas.attr('class'));
+    //     newCanvas.addClass('active');
 
-        newCanvas = document.createElement('canvas');
-        newCanvas.attr('class') = canvas.attr('class');
-        newCanvas.id = canvas.id;
-        canvas.id = 'temp';
-        canvas.remove();
-        newCanvas.after($('#temp'));
+    //     var id = canvas.attr("id");
+    //     canvas.attr("id", "temp");
+    //     newCanvas.attr("id", id);
 
-    }
+
+    //     newCanvas.after(canvas);
+    //     // $('.chartjs-size-monitor').remove();
+    //     $('#temp').remove();
+    //     console.log('the new canvas', canvas);
+    //     return newCanvas}
+
+
 
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
@@ -132,7 +146,10 @@ jQuery(function () {
     function plotChart(config) {
         var id = config.getId();
         $(`#${id}`).empty();
-        new Chart($(`#${id}`), config.getConfig());
+
+        chartObject[id] = new Chart($(`#${id}`), config.getConfig());
+
+
         plotTitle.text(config.getTitle());
         showCanvas(id);
     }
