@@ -1,15 +1,6 @@
 <?php
 session_start();
 
-
-
-
-if (isset($_GET['user'])) {
-
-    echo $_SESSION['username'];
-    exit;
-}
-
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data['action'] == 'login') {
@@ -20,10 +11,8 @@ if ($data['action'] == 'login') {
     } else   echo json_encode(array("status" => 400, "message" => "username or password incorrect"));
 } else if ($data['action'] == 'register') {
 
-    if (username_exists($data)) {
-
-        echo json_encode(array("status" => 400, "message" => "username already exists"));
-    } else {
+    if (username_exists($data)) echo json_encode(array("status" => 400, "message" => "username already exists"));
+    else {
         $users = getUsers();
         $token = tokenGenerator();
         $newUser = array("username" => $data["username"], "password" => $data["password"], "token" => $token);
@@ -33,9 +22,6 @@ if ($data['action'] == 'login') {
         echo json_encode(array("status" => 200, "message" => "register successful"));
     }
 }
-
-
-
 
 
 // UTILS

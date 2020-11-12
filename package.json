@@ -10,7 +10,9 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "bootstrap": "^4.5.3",
     "browserify": "^17.0.0",
+    "chart.js": "^2.9.4",
     "esm": "^3.2.25",
     "jquery": "^3.5.1",
     "particlesjs": "^2.2.3",
