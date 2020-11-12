@@ -238,21 +238,6 @@ function unique(value, index, self) {
 }
 
 
-// change color chart
-
-/*
-    var bars = myObjBar.datasets[0].bars;
-    for (i = 0; i < bars.length; i++) {
-        var color = "green";
-        //You can check for bars[i].value and put your conditions here
-        bars[i].fillColor = color;
-
-    }
-    myObjBar.update(); //update the chart
-    */
-
-
-
 function getDefaultConfig() {
     return {
         type: 'scatter',

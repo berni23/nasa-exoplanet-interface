@@ -82,8 +82,6 @@ jQuery(function () {
         }
         if (target.hasClass("my-content") && !target.hasClass("content-active")) {
 
-            console.log('content-active');
-
             var lastActive = $(".content-active");
             $(`#${lastActive.attr('data-content')}`).addClass('hidden');
             lastActive.removeClass("content-active");
@@ -109,7 +107,7 @@ jQuery(function () {
                 if (id in configObject) showCanvas(id);
                 else {
                     showCanvas(id);
-                    switch (dataChart) {
+                    switch (id) {
                         case "chart-1-1":
                             plotDiscMethod("chart-1-1").then(config => plotChart(config));
                             break;
@@ -192,7 +190,7 @@ jQuery(function () {
 
     function plotDiscMethod(id) {
         if (!(id in configObject)) {
-            getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
+            return getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
                 data = JSON.parse(data)['data'];
                 var methods = data["pl_discmethod"];
                 var type_methods = (methods.filter(unique))
