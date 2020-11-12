@@ -5,7 +5,7 @@ session_start();
 
 include "utils.php";
 
-$path = "data/bernat/exoplanets.csv";
+$path = "data/bernat/exoplanets.csv"; // hardcoded path, to be set by the username
 if (isset($_GET['user'])) echo $_SESSION['username'];
 
 if (isset($_GET['distance_rad'])) {
@@ -15,11 +15,9 @@ if (isset($_GET['distance_rad'])) {
 
 if (isset($_GET['columns'])) {
     $data = json_decode(file_get_contents('php://input'), true);
-    $columns = getColumns($data['name'], $data['levelWith']);
+    $columns = getColumns($data['name'], $data['levelWith'], $path);
     echo json_encode($columns);
 }
-
-
 
 function distanceVSradius()
 {
