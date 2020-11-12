@@ -94,7 +94,6 @@ jQuery(function () {
     }
 
 
-
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
             var id = $(event.target).attr("data-chart");
@@ -104,10 +103,16 @@ jQuery(function () {
                 else {
                     switch (id) {
                         case "chart-1-1":
-                            plotDiscMethod("chart-1-1").then(config => plotChart(config));
+                            plotDisc("chart-1-1").then(config => plotChart(config));
                             break;
                         case "chart-1":
                             getDistanceVsRad("chart-1").then(config => plotChart(config));
+                            break;
+                        case "chart-1-2":
+                            plotDisc("chart-1-2", "pl_facility").then(config => plotChart(config));
+                            break;
+                        case "chart-1-3":
+                            plotMass("chart-1-3").then(config => plotChart(config));
                             break;
                     }
                 }
@@ -178,11 +183,11 @@ jQuery(function () {
         return configChart;
     }
 
-    function plotDiscMethod(id) {
+    function plotDisc(id, column = "pl_discmethod") {
         if (!(id in configObject)) {
-            return getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
+            return getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", column], ["pl_orbsmax", "pl_radj"]).then(function (data) {
                 data = JSON.parse(data)['data'];
-                var methods = data["pl_discmethod"];
+                var methods = data[column];
                 var type_methods = (methods.filter(unique))
                 var datasets = [];
                 type_methods.forEach((method, i) => {
@@ -215,8 +220,64 @@ jQuery(function () {
         }
     }
 
-    function round(num) {
+    function plotMass(id, column = "pl_bmassj") {
+        if (!(id in configObject)) {
+            return getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", column], ["pl_orbsmax", "pl_radj"]).then(function (data) {
+                data = JSON.parse(data)['data'];
+                var mass_values = data[column];
+                var mass_ranges = [
+                    [0, 0.1],
+                    [0.1, 0.3],
+                    [0.3, 0.7],
+                    [0.7, 1],
+                    [1, 3],
+                    [3, 1000]
+                ]
+                var mass_legend = ["0-0.1 Mjup", "0.1-0.3 Mjup", "0.3-0.7 Mjup", "0.7-1 Mjup", "1-3 Mjup", ">3 Mjup", "unknown"]
+                var datasets = [];
+                mass_legend.forEach((legend, i) => {
+                    datasets.push({});
+                    datasets[i]['data'] = [];
+                    datasets[i]['backgroundColor'] = getRandomColor();
+                    datasets[i]['label'] = legend;
+                    datasets[i]['extra'] = [];
+                });
 
+                mass_values.forEach(function (mass_val, i) {
+                    var j = indexMass(mass_val, mass_ranges);
+
+                    datasets[j]['data'].push({
+                        x: data["pl_orbsmax"][i],
+                        y: data["pl_radj"][i]
+                    })
+                    datasets[j]['extra'].push(data["pl_hostname"][i]);
+                })
+                var config = new ConfigChart(getDefaultConfig());
+                config.setId(id);
+                config.setDataset(datasets);
+                config.setLabels('semimajor axis (AU)', 'planet radius (Rjup)');
+                config.setTitle("Distance to the star vs planet radius");
+                configObject[id] = config;
+                return config
+            })
+        } else {
+            var config = configObject[id];
+            return config;
+        }
+
+        function indexMass(mass_val, mass_ranges) {
+            for (let i = 0; i < mass_ranges.length; i++) {
+                if ((mass_ranges[i][0] < mass_val) && mass_ranges[i][1] >= mass_val) {
+                    return i
+                }
+            }
+
+            console.log(mass_val);
+            return mass_ranges.length;
+        }
+    }
+
+    function round(num) {
         return Math.round((num) * 100) / 100
     }
 });

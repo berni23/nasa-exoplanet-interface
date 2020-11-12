@@ -12,13 +12,11 @@ async function requestAPI() {
 async function fetchDistanceRad() {
     const res = await fetch('server/viewmodel.php?distance_rad');
     return await res.text();
-
 }
 
 async function getCurrentUser() {
     const res = await fetch('server/viewmodel.php?user');
     return await res.text();
-
 }
 
 async function getColumns(colnames, arrayNames) {
