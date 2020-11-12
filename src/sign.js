@@ -10,10 +10,11 @@ $(document).ready(function () {
     var registerForm = $(".register-form");
 
     particlesJS.load('particles-js', 'assets/particles.json', function () {
+
+        // pJSDom[0].pJS.particles.move.enable = false;
         loginTitle.fadeIn(5000);
         nasaIcon.fadeIn(2000, () => loginPanel.fadeIn(3000));
-        // pJSDom[0].pJS.particles.move.enable = false;
-    });
+    })
 
 
     register.on("click", showRegister);
@@ -80,9 +81,11 @@ $(document).ready(function () {
     function validateRegister() {
         var input = $(".register-form input[name='confirm password']");
         if ($(".register-form input[name='password']").val() != input.val()) {
+
             $(input).after("<div class='error-msg col-lg-12 col-md-8'><p>passwords must match</p></div>");
 
-        } else validate('register');
+            return [false, null];
+        } else return validate('register');
     }
 
 

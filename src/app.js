@@ -20,12 +20,8 @@ jQuery(function () {
     // btnPlotSettings.trigger("click");
 
     function initialize() {
-
-
-
         requestAPI()
         getDistanceVsRad('chart-1').then(config => {
-            console.log(config);
             plotChart(config);
         })
     }
@@ -156,7 +152,6 @@ jQuery(function () {
             myConfig.setDataset(datasets);
             myConfig.setLabels(labels.x, labels.y);
             myConfig.setId(id);
-
             configObject[id] = myConfig;
             return myConfig;
         })
@@ -166,7 +161,6 @@ jQuery(function () {
     //plotDiscMethod();
 
     function setSettingsToModal(configChart) {
-        console.log('config:', configChart);
         max_x.val(configChart.getMaxX());
         max_y.val(configChart.getMaxY());
         showLegend.prop('checked', configChart.getShowLegend());
@@ -180,10 +174,8 @@ jQuery(function () {
         var maxY = parseFloat(round(max_y.val()));
         configChart.setMaxX(maxX);
         configChart.setMaxY(maxY);
-        console.log(showLegend.prop('checked'));
         configChart.setShowLegend(showLegend.prop('checked'));
         configChart.setShowLabels(showLabels.prop('checked'));
-
         return configChart;
     }
 
@@ -275,8 +267,6 @@ jQuery(function () {
                     return i
                 }
             }
-
-            console.log(mass_val);
             return mass_ranges.length;
         }
     }
