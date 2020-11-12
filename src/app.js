@@ -3,7 +3,7 @@ jQuery(function () {
     var sidebar = $('#sidebar');
     var myChart = $("#chart-1");
     var menuWidth = sidebar.outerWidth();
-    var btnPlotSettings = $(".plot-settings");
+    var btnPlotSettings = $(".btn-plot-settings");
     var plotTitle = $("#plot-title");
     var main = $('main');
 
@@ -31,12 +31,9 @@ jQuery(function () {
     btnPlotSettings.on("click", function () {
         clearErrors();
         var id = $("canvas.active").attr('id');
-        console.log(configObject);
         setSettingsToModal(configObject[id]);
     })
     $("#edit-plot-settings").on("click", function () {
-        //var regex = /(?<=^|)\d+\.\d+(?=$|)/;
-
         var regex = /^\d+(\.\d+)*$/
         var error = 'only numbers with decimals';
         var conditions = [regex, regex];
@@ -51,7 +48,6 @@ jQuery(function () {
             chartObject[id] = new Chart($("canvas.active"), config.getConfig());
             $("#close-plot-settings").trigger("click");
         }
-
     })
 
 
@@ -81,7 +77,6 @@ jQuery(function () {
             }
         }
         if (target.hasClass("my-content") && !target.hasClass("content-active")) {
-
             var lastActive = $(".content-active");
             $(`#${lastActive.attr('data-content')}`).addClass('hidden');
             lastActive.removeClass("content-active");
@@ -99,6 +94,7 @@ jQuery(function () {
     }
 
 
+
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
             var id = $(event.target).attr("data-chart");
@@ -106,7 +102,6 @@ jQuery(function () {
             if (!chart.hasClass('active')) {
                 if (id in configObject) showCanvas(id);
                 else {
-                    showCanvas(id);
                     switch (id) {
                         case "chart-1-1":
                             plotDiscMethod("chart-1-1").then(config => plotChart(config));
@@ -123,10 +118,7 @@ jQuery(function () {
     function plotChart(config) {
         var id = config.getId();
         $(`#${id}`).empty();
-
         chartObject[id] = new Chart($(`#${id}`), config.getConfig());
-
-
         plotTitle.text(config.getTitle());
         showCanvas(id);
     }
@@ -155,10 +147,8 @@ jQuery(function () {
             myConfig.setDataset(datasets);
             myConfig.setLabels(labels.x, labels.y);
             myConfig.setId(id);
-            console.log(myConfig);
 
             configObject[id] = myConfig;
-
             return myConfig;
         })
     }
@@ -216,7 +206,7 @@ jQuery(function () {
                 config.setDataset(datasets);
                 config.setLabels('semimajor axis (AU)', 'planet radius (Rjup)');
                 config.setTitle("Distance to the star vs planet radius");
-                configObject[id] = config.getConfig();
+                configObject[id] = config;
                 return config
             })
         } else {
