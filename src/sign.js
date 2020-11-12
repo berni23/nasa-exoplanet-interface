@@ -58,13 +58,11 @@ $(document).ready(function () {
             $('login-form>.username').after(`<div class='error-msg'><p>${res['message']}</p></div>`);
             return false
         } else return true;
-
     }
 
     function hideLogin() {
         pJSDom[0].pJS.particles.move.enable = false;
         sectionLogin.fadeOut(3000, () => window.location = "app.html");
-
     }
 
     function validate(action = "login") {
@@ -79,11 +77,9 @@ $(document).ready(function () {
         return [validateLoop(inputs, conditions, errors), formData];
     }
 
-
     function validateRegister() {
         var input = $(".register-form input[name='confirm password']");
         if ($(".register-form input[name='password']").val() != input.val()) {
-
             $(input).after("<div class='error-msg col-lg-12 col-md-8'><p>passwords must match</p></div>");
 
         } else validate('register');

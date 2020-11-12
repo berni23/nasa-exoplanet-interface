@@ -20,6 +20,10 @@ jQuery(function () {
     // btnPlotSettings.trigger("click");
 
     function initialize() {
+
+
+
+        requestAPI()
         getDistanceVsRad('chart-1').then(config => {
             console.log(config);
             plotChart(config);

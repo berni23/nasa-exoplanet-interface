@@ -11,11 +11,15 @@ $dataPath = $_SESSION['data_path'];
 
 if (isset($_GET['data'])) {
 
+    if (!file_exists($dataPath)) {
+
+        mkdir($dataPath);
+        chmod($dataPath, 0755);
+    }
     $path = $dataPath . '/' . $_GET['data'] . '.csv';
     if (file_exists($path)) echo 'data already avaliable';
 
     else {
-
         $table = file_get_contents($endpoint . "?api_key=" . $api_key . "&table=" . $_GET['data'] . "&format=json");
         $data = json_decode($table, true);
         $header = array_keys($data[0]);
