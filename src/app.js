@@ -78,23 +78,14 @@ jQuery(function () {
 
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
-
-
             var dataChart = $(event.target).attr("data-chart");
-
-
             if (!configObject[dataChart]) {
-
-
                 switch (dataChart) {
-
-
-                    case "chart-1-1": {
-
+                    case "chart-1-1":
                         plotDiscMethod()
-                    }
-                }
+                        break;
 
+                }
 
             }
 
@@ -161,29 +152,22 @@ jQuery(function () {
     function plotDiscMethod() {
         getColumns(["pl_orbsmax", "pl_radj", "pl_hostname", "pl_discmethod"], ["pl_orbsmax", "pl_radj"]).then(function (data) {
 
-            console.log(data);
-            data = JSON.parse(data);
+            data = JSON.parse(data)['data'];
             var methods = data["pl_discmethod"];
             var type_methods = (methods.filter(unique))
             var datasets = [];
-
             type_methods.forEach((method, i) => {
-
                 datasets.push({});
-
                 datasets[i]['data'] = [];
                 datasets[i]['backgroundColor'] = getRandomColor();
                 datasets[i]['label'] = method;
                 datasets[i]['extra'] = [];
-
                 //   color_methods[method] = 
 
             });
 
             methods.forEach(function (method, i) {
-
                 var j = type_methods.indexOf(method);
-
                 datasets[j]['data'].push({
                     x: data["pl_orbsmax"][i],
                     y: data["pl_radj"][i]
@@ -193,21 +177,14 @@ jQuery(function () {
 
             })
 
-
             var config = new ConfigChart(getDefaultConfig())
-
             config.setId('chart-1-1');
             config.setDataset(datasets);
             config.setLabels('semimajor axis (AU)', 'planet radius (Rjup)');
-            configObject['chart-1-1'] = config;
-
-            new Chart(config, $('#chart-1-1'));
+            configObject['chart-1-1'] = config.getConfig();
+            new Chart($('#chart-1-1'), config.getConfig());
 
         })
-
-
-
-
 
     }
 });

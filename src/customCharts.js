@@ -277,7 +277,7 @@ function getDefaultConfig() {
                     position: 'bottom',
                     scaleLabel: {
                         display: true,
-                        labelString: labels.x
+                        labelString: ""
                     },
 
                     ticks: {
@@ -290,7 +290,7 @@ function getDefaultConfig() {
                 yAxes: [{
                     scaleLabel: {
                         display: true,
-                        labelString: labels.y
+                        labelString: ""
                     },
                     ticks: {
                         min: 0,
