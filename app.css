@@ -159,6 +159,18 @@ ul {
     margin: 5px auto;
 }
 
+.buttons-sidebar {
+
+    position: absolute;
+    bottom: 5%;
+    margin-left: 10px;
+}
+
+.buttons-sidebar button {
+    border: none;
+    font-size: 0.8rem;
+    background-color: #5b68a5 !important;
+}
 
 /* ---------------------------------------------------
     CONTENT STYLE

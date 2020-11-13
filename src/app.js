@@ -28,6 +28,14 @@ jQuery(function () {
 
     initialize();
 
+
+    $("#log-out").on("click", function () {
+
+        destroySession();
+        window.location = "index.html";
+
+    })
+
     btnPlotSettings.on("click", function () {
         clearErrors();
         var id = $("canvas.active").attr('id');
@@ -274,4 +282,8 @@ jQuery(function () {
     function round(num) {
         return Math.round((num) * 100) / 100
     }
+
+
+
+
 });

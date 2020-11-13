@@ -1,1 +1,22 @@
-{"6094a63695dfbf246396110988f496":{"username":"mongo","password":"A12345","token":"6094a63695dfbf246396110988f496"},"default":{"username":"bernat","password":"A12345","token":"default"},"323663e8ca8fad928fcbdee6f1406d":{"username":"vladi","password":"A12345","token":"323663e8ca8fad928fcbdee6f1406d"},"e06b54580f25d44b5e4c952cf38481":{"username":"fake","password":"A12345","token":"e06b54580f25d44b5e4c952cf38481"}}
+{
+    "6094a63695dfbf246396110988f496": {
+        "username": "mongo",
+        "password": "A12345",
+        "token": "6094a63695dfbf246396110988f496"
+    },
+    "default": {
+        "username": "bernat",
+        "password": "A12345",
+        "token": "default"
+    },
+    "323663e8ca8fad928fcbdee6f1406d": {
+        "username": "vladi",
+        "password": "A12345",
+        "token": "323663e8ca8fad928fcbdee6f1406d"
+    },
+    "e06b54580f25d44b5e4c952cf38481": {
+        "username": "fake",
+        "password": "A12345",
+        "token": "e06b54580f25d44b5e4c952cf38481"
+    }
+}

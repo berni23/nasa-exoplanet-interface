@@ -11,7 +11,7 @@ $(document).ready(function () {
 
     particlesJS.load('particles-js', 'assets/particles.json', function () {
 
-        // pJSDom[0].pJS.particles.move.enable = false;
+        pJSDom[0].pJS.particles.move.enable = true;
         loginTitle.fadeIn(5000);
         nasaIcon.fadeIn(2000, () => loginPanel.fadeIn(3000));
     })
@@ -31,7 +31,6 @@ $(document).ready(function () {
         event.preventDefault();
         var data = validateRegister();
         if (data[0] && checkUser(data[1])) hideLogin();
-
 
     })
 

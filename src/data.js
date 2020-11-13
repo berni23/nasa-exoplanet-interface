@@ -20,11 +20,9 @@ async function getCurrentUser() {
 }
 
 async function getColumns(colnames, arrayNames) {
-
     var data = {
         name: colnames,
         levelWith: arrayNames
-
     }
     const res = await fetch('server/viewmodel.php?columns', {
         method: 'POST',
@@ -34,9 +32,11 @@ async function getColumns(colnames, arrayNames) {
 }
 
 
+function destroySession() {
+    fetch('server/sign.php?destroy')
+}
+
 // getColumn(['pl_hostname'], ['pl_radj']).then(res => console.log(res));
-
-
 
 function dataScatter(dataX, dataY) {
     var data = dataX.map(function (x, i) {
@@ -46,8 +46,9 @@ function dataScatter(dataX, dataY) {
         }
     });
     return data;
-
 }
+
+
 
 // astronomy constants in international units
 

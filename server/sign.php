@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+
+if (isset($_GET['destroy'])) {
+
+    session_destroy();
+    exit;
+}
+
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($data['action'] == 'login') {
