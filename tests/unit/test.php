@@ -7,15 +7,11 @@ use PHPUnit\Framework\TestCase;
 
 include "../../server/csvTools";
 
-
-
 class test extends TestCase
 
 {
 
-
     /**@test */
-
 
     public function testCSVcolumns()
     {
