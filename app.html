@@ -199,7 +199,6 @@
 
         <!-- Modal -->
 
-
         <div class="modal fade" id="logoutmodal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -216,11 +215,21 @@
                     <div class="modal-footer">
                         <button type="button" id="confirm-logout" class="btn btn-primary" data-dismiss="modal">Log
                             out</button>
-                        <button type="button" id="cancel-logout" class="btn btn-secondary">cancel</button>
+                        <button type="button" id="cancel-logout" class="btn btn-secondary"
+                            data-dismiss="modal">cancel</button>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row spinner-wrapper hidden flex-column align-items-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="row">
+                <strong>Fetching data..</strong>
+            </div>
+
     </body>
     <script type='module' src="src/app.js" defer></script>
 

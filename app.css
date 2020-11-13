@@ -306,18 +306,8 @@ ul {
 
 #myChart2 {
 
-
     width: 100%;
 }
-
-
-/*#myChart {
-
-    max-height: 700px !important;
-    max-width: 700px !important;
-}
-*/
-
 
 
 
@@ -348,4 +338,20 @@ ul {
 .dropdownMenu {
 
     font-size: 0.85em !important;
+}
+
+.spinner-wrapper {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+}
+
+.spinner-wrapper strong {
+
+    margin-top: 10px;
+}
+
+.spinner-border {
+    width: 150px;
+    height: 150px
 }

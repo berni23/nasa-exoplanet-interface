@@ -7,6 +7,7 @@ jQuery(function () {
     var plotTitle = $("#plot-title");
     var modalDataUpdate = $("#modal-data-update");
     var main = $('main');
+    var wait = $('.spinner-wrapper');
 
     // input settngs
 
@@ -22,6 +23,8 @@ jQuery(function () {
 
     function initialize() {
         askAPI().then(function (res) {
+
+
             res = JSON.parse(res);
             if (res["exists"]) {
                 modalDataUpdate.modal('show');
@@ -31,7 +34,11 @@ jQuery(function () {
     }
 
     function queryApi() {
-        requestAPI().then(() => getDistanceVsRad('chart-1').then(config => plotChart(config)))
+        wait.removeClass('hidden');
+        requestAPI().then(() => getDistanceVsRad('chart-1').then(config => {
+            wait.addClass("hidden");
+            plotChart(config)
+        }))
     }
 
     initialize();

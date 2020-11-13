@@ -12,7 +12,6 @@ $dataPath = $_SESSION['data_path'];
 if (isset($_GET['ask'])) {
 
     if (!file_exists($dataPath)) {
-
         mkdir($dataPath);
         chmod($dataPath, 0755);
     }
