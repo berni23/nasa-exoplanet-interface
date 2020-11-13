@@ -91,8 +91,10 @@
                     </ul>
 
                     <div class="buttons-sidebar">
-                        <button id="log-out" class="btn btn-primary">Log out</button>
-                        <button class="btn btn-primary ">Refresh</button>
+                        <button id="log-out" class="btn btn-primary" data-toggle="modal" data-target="#logoutmodal">Log
+                            out</button>
+                        <button class="btn btn-primary">Refresh</button>
+                        </button>
                     </div>
                 </div>
             </nav>
@@ -141,8 +143,6 @@
                     <canvas id="chart-1-1" class="hidden"></canvas>
                     <canvas id="chart-1-2" class="hidden"></canvas>
                     <canvas id="chart-1-3" class="hidden"></canvas>
-
-
                 </div>
             </main>
             <!--modals-->
@@ -173,6 +173,50 @@
                         <button type="button" class="btn btn-primary" id='edit-plot-settings'>apply</button>
                         <button type="button" id="close-plot-settings" class="btn btn-secondary"
                             data-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" id="modal-data-update" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Good to see you again </h5>
+                    </div>
+                    <div class="modal-body">
+                        <p></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="confirm-update" class="btn btn-primary"
+                            data-dismiss="modal">update</button>
+                        <button type="button" id="cancel-update" class="btn btn-secondary"
+                            data-dismiss="modal">cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+
+
+        <div class="modal fade" id="logoutmodal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="logOutModalLabel">We hope to see you again !</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="confirm-logout" class="btn btn-primary" data-dismiss="modal">Log
+                            out</button>
+                        <button type="button" id="cancel-logout" class="btn btn-secondary">cancel</button>
                     </div>
                 </div>
             </div>

@@ -5,6 +5,7 @@ jQuery(function () {
     var menuWidth = sidebar.outerWidth();
     var btnPlotSettings = $(".btn-plot-settings");
     var plotTitle = $("#plot-title");
+    var modalDataUpdate = $("#modal-data-update");
     var main = $('main');
 
     // input settngs
@@ -20,27 +21,34 @@ jQuery(function () {
     // btnPlotSettings.trigger("click");
 
     function initialize() {
-        requestAPI()
-        getDistanceVsRad('chart-1').then(config => {
-            plotChart(config);
+        askAPI().then(function (res) {
+            res = JSON.parse(res);
+            if (res["exists"]) {
+                modalDataUpdate.modal('show');
+                modalDataUpdate.find('.modal-body p').text(res["message"]);
+            } else queryApi();
         })
+    }
+
+    function queryApi() {
+        requestAPI().then(() => getDistanceVsRad('chart-1').then(config => plotChart(config)))
     }
 
     initialize();
 
+    $("#confirm-update").on("click", () => queryApi())
+    $("#cancel-update").on("click", () => getDistanceVsRad('chart-1').then(config => plotChart(config)));
 
-    $("#log-out").on("click", function () {
-
+    $("#confirm-logout").on("click", function () {
         destroySession();
         window.location = "index.html";
-
     })
 
     btnPlotSettings.on("click", function () {
         clearErrors();
         var id = $("canvas.active").attr('id');
         setSettingsToModal(configObject[id]);
-    })
+    });
     $("#edit-plot-settings").on("click", function () {
         var regex = /^\d+(\.\d+)*$/
         var error = 'only numbers with decimals';
@@ -56,7 +64,7 @@ jQuery(function () {
             chartObject[id] = new Chart($("canvas.active"), config.getConfig());
             $("#close-plot-settings").trigger("click");
         }
-    })
+    });
 
 
     $('#sidebarCollapse').on('click', function () {

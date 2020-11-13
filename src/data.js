@@ -8,6 +8,11 @@ async function requestAPI() {
     return await res.text();
 }
 
+async function askAPI() {
+    const res = await fetch('server/api_requests.php?ask=exoplanets');
+    return await res.text();
+}
+
 
 async function fetchDistanceRad() {
     const res = await fetch('server/viewmodel.php?distance_rad');
@@ -47,11 +52,7 @@ function dataScatter(dataX, dataY) {
     });
     return data;
 }
-
-
-
 // astronomy constants in international units
-
 
 function getAstroConstants() {
     return {

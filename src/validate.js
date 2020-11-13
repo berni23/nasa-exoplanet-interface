@@ -13,7 +13,6 @@ function validateLoop(inputs, conditions, messages) {
     inputs.forEach(function (input, i) {
         if (!validateInput(input, conditions[i], messages[i])) valid = false;
     })
-
     return valid;
 }
 
