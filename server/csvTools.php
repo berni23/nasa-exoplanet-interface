@@ -1,9 +1,5 @@
 <?php
 
-function test()
-{
-    return true;
-}
 
 
 function writeCSV($path, $data, $header, $option = 'w')
