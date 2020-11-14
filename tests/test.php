@@ -1,15 +1,33 @@
 <?php
 
 
+
 include 'server/csvTools.php';
 
 use PHPUnit\Framework\TestCase;
 
 
+/** 
+ * Testing data reliability and csv Tools 
+ * @author Bernat
+ */
+
+
 
 class test extends TestCase
 {
-    /**@test**/
+    /** @test */
+
+    public function testDataExists()
+    {
+        $this->assertFileExists('server/data/bernat/exoplanets.csv');
+    }
+
+
+    public function testDataReadable()
+    {
+        $this->assertIsReadable('server/data/bernat/exoplanets.csv');
+    }
 
     public function testCSVcolumns()
     {
@@ -18,24 +36,5 @@ class test extends TestCase
         $col1 = getColumn('pl_letter', $path);
         $col2 = getColumns(['pl_letter'], [], $path);
         $this->assertEquals($col1['status'], $col2['status']);
-    }
-    public function testMultiplyTwoNums()
-    {
-        $a = 5;
-        $b = 4;
-        $c = $a * $b;
-        //$this->assertTrue(false);
-        $this->assertEquals($c, 20);
-    }
-
-    public function testMultiplyTwoNums2()
-    {
-
-        $a = 5;
-        $b = 4;
-        $c = $a * $b;
-        //$this->assertTrue(false);
-
-        $this->assertEquals($c, 20);
     }
 }

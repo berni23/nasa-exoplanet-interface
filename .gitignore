@@ -1,5 +1,6 @@
 
 
-tests/vendor/
+tests/
+vendor/
 /node_modules
 /server/data/assembler
