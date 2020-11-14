@@ -9,7 +9,7 @@ $(document).ready(function () {
     var loginForm = $(".login-form");
     var registerForm = $(".register-form");
 
-    particlesJS.load('particles-js', 'assets/particles.json', function () {
+    particlesJS.load('particles-js', 'assets/particles/particles.json', function () {
 
         pJSDom[0].pJS.particles.move.enable = true;
         loginTitle.fadeIn(5000);

@@ -1,0 +1,1 @@
+C:37:"PHPUnit\Runner\DefaultTestResultCache":269:{a:2:{s:7:"defects";a:2:{s:20:"test::testCSVcolumns";i:4;s:27:"bernat\test::testCSVcolumns";i:4;}s:5:"times";a:4:{s:20:"test::testCSVcolumns";d:0.154;s:25:"test::testMultiplyTwoNums";d:0;s:26:"test::testMultiplyTwoNums2";d:0;s:27:"bernat\test::testCSVcolumns";d:0.001;}}}

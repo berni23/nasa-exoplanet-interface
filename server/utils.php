@@ -1,16 +1,16 @@
-
 <?php
-
-
+include "csvTools.php";
 
 error_reporting(E_ERROR | E_PARSE);
 
 
-include "csvTools.php";
+function test()
+{
+    return true;
+}
+
 
 function getDataPath()
 {
     return 'data';
 }
-
-?>

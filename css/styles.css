@@ -1,8 +1,8 @@
 @font-face {
 
     font-family: 'nasa';
-    src: url('assets/Nasa.woff') format('woff'),
-        url('assets/Nasa.ttf') format('truetype');
+    src: url('../assets/fonts/Nasa.woff') format('woff'),
+        url('../assets/fonts/Nasa.ttf') format('truetype');
 
 }
 

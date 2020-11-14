@@ -21,10 +21,10 @@ jQuery(function () {
 
     // btnPlotSettings.trigger("click");
 
+    initialize();
+
     function initialize() {
         askAPI().then(function (res) {
-
-
             res = JSON.parse(res);
             if (res["exists"]) {
                 modalDataUpdate.modal('show');
@@ -40,8 +40,6 @@ jQuery(function () {
             plotChart(config)
         }))
     }
-
-    initialize();
 
     $("#confirm-update").on("click", () => queryApi())
     $("#cancel-update").on("click", () => getDistanceVsRad('chart-1').then(config => plotChart(config)));
@@ -72,15 +70,13 @@ jQuery(function () {
             $("#close-plot-settings").trigger("click");
         }
     });
-
-
     $('#sidebarCollapse').on('click', function () {
         sidebar.toggleClass('active');
         $(this).toggleClass('active');
-        if (!myChart.hasClass('hidden')) {
-            if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
-            else myChart.width(`-=${menuWidth}`);
-        }
+        // if (!myChart.hasClass('hidden')) {
+        //     if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
+        //     else myChart.width(`-=${menuWidth}`);
+        // }
     });
 
     menuItems.on('click', function (event) {
@@ -115,7 +111,6 @@ jQuery(function () {
         $(`#${id}`).removeClass('hidden');
         $(`#${id}`).addClass('active');
     }
-
 
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
@@ -179,9 +174,6 @@ jQuery(function () {
             return myConfig;
         })
     }
-
-    //getDistanceVsRad();
-    //plotDiscMethod();
 
     function setSettingsToModal(configChart) {
         max_x.val(configChart.getMaxX());
@@ -287,7 +279,7 @@ jQuery(function () {
         function indexMass(mass_val, mass_ranges) {
             for (let i = 0; i < mass_ranges.length; i++) {
                 if ((mass_ranges[i][0] < mass_val) && mass_ranges[i][1] >= mass_val) {
-                    return i
+                    return i;
                 }
             }
             return mass_ranges.length;
@@ -297,8 +289,5 @@ jQuery(function () {
     function round(num) {
         return Math.round((num) * 100) / 100
     }
-
-
-
 
 });
