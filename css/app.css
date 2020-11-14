@@ -73,10 +73,10 @@ ul {
 .sidebar-body li {
     padding: 20px;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 .sidebar-body span {
-    cursor: pointer;
     margin-left: 10px;
 }
 
@@ -183,7 +183,6 @@ ul {
     overflow: auto;
 }
 
-
 .content-active {
     background-color: #6d7fcc;
 }
@@ -193,30 +192,23 @@ ul {
 }
 
 .plot-settings {
-
     display: flex !important;
 }
 
 .plot-settings button {
-
-
     outline-style: none !important;
     outline: none !important;
 }
 
 .fa-cog {
-
     margin-top: 3px !important;
 }
 
 .label-sort-by {
-
     margin-bottom: 3px;
 }
 
 /* modal plot settings */
-
-
 
 .input-axis {
     width: 50px;

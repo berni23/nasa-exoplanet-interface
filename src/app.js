@@ -1,8 +1,6 @@
 jQuery(function () {
-    var menuItems = $('.sidebar-body>ul');
+    var menuItems = $('.sidebar-body');
     var sidebar = $('#sidebar');
-    var myChart = $("#chart-1");
-    var menuWidth = sidebar.outerWidth();
     var btnPlotSettings = $(".btn-plot-settings");
     var plotTitle = $("#plot-title");
     var modalDataUpdate = $("#modal-data-update");
@@ -82,6 +80,9 @@ jQuery(function () {
     menuItems.on('click', function (event) {
         var target = $(event.target);
         var dropdown = target.closest('.Dropdown');
+        var li = target.closest('.my-content');
+
+        console.log(dropdown);
         if (dropdown) {
             if (dropdown.hasClass("dropped")) {
                 dropdown.children(".fa-caret-down").addClass('hidden');
@@ -95,12 +96,12 @@ jQuery(function () {
                 dropdown.addClass('dropped');
             }
         }
-        if (target.hasClass("my-content") && !target.hasClass("content-active")) {
+        if (li.hasClass("my-content") && !li.hasClass("content-active")) {
             var lastActive = $(".content-active");
             $(`#${lastActive.attr('data-content')}`).addClass('hidden');
             lastActive.removeClass("content-active");
-            target.addClass("content-active");
-            var id = target.attr("data-content");
+            li.addClass("content-active");
+            var id = li.attr("data-content");
             $(`#${id}`).removeClass('hidden');
         }
     })

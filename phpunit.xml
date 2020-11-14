@@ -17,6 +17,4 @@ stopOnFailure="true">
 </testsuite>
 
 </testsuites>
-
-
 </phpunit>
