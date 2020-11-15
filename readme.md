@@ -24,6 +24,8 @@ This project provides the user with an interface for a better interaction and vi
 
 <h3>Folder structure</h3>
 
+<br>
+
  This project contains: 
 
 
@@ -38,7 +40,7 @@ This project provides the user with an interface for a better interaction and vi
 
 * package.json/package-lock.json: list of packages used in javascript
 
-  
+<br>
 
 * **assets folder** :Project assets like logos, fonts or  json objects for rendering graphics
 
@@ -71,11 +73,12 @@ This project provides the user with an interface for a better interaction and vi
   
   - proposal.pdf: presentation of the initial proposal
 
-  * **Postman folder** : folder containing some of  example api  of the requests performed.
+  - **Postman folder** : folder containing some of  example api  of the requests performed.
 
-    
+<br>
+  
 
-- **server folder**:
+* **server folder**:
 
   * api_requests.php: handles queries related with  fetching to the NASA api.
   
@@ -89,6 +92,7 @@ This project provides the user with an interface for a better interaction and vi
   
   * **data folder** :  Folder containing the user folders.
 
+<br>
   
 
 * **src folder**
@@ -105,24 +109,39 @@ This project provides the user with an interface for a better interaction and vi
 
   * validate.js: Set of functions used for validating  inputs.
 
-    ​	
+    
 
 <hr>
 <h3>Users.json</h3>
 
 
+The users data is all saved in the same json file, located in the server side. Each user is given a random and unique token, present both as the primary index and as  the property 'token' . Moreover, it has username and password. The first one must also be unique , and the password must contain a minimum of 6 characters, a number and a capital letter.
+
+
+            `"6094a63695dfbf246396110988f496": {
+                "username": "mongo",
+                "password": "******",
+                "token": "6094a63695dfbf246396110988f496"
+            },
+           
+            "323663e8ca8fad928fcbdee6f1406d": {
+                "username": "bernat",
+                "password": "******",
+                "token": "323663e8ca8fad928fcbdee6f1406d"
+             }`
+<br>
 
 <h3>NASA API(S)</h3>
 
 
 
-  NASA offers a set of api's accessible with the same api key.
+NASA offers a set of api's accessible with the same api key.
 
-
+<br>
 
 * **Obtaining an api key**.  In order to get an api key you just have to  give your first name, last name and a valid email .  [](https://api.nasa.gov/ "click here to get a key") .  Using this key, you will be able o use apis like *Astronomy picture of the day* ,  *Earth*,  *Exoplanet*, *Mars rover Photos*,  and many others.
 
-  
+ 
 
 -  **Limits**: Hourly Limit: 1,000 requests per hour.
 
@@ -150,7 +169,7 @@ The Exoplanet Archive API allows programatic access to [NASA's Exoplanet Archive
 
 * All planetary candidates smaller than 2Re with equilibrium temperatures between 180-303K
 
-    ` https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=cumulative&where=koi_prad<2andkoi_teq>180 and    koi_teq<303andkoi_dispositionlike'CANDIDATE')  `
+    ` https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?table=cumulative&where=koi_prad<2andkoi_teq>180 and koi_teq<303andkoi_dispositionlike'CANDIDATE')  `
 
  <br>
 
@@ -177,7 +196,7 @@ With this api you can fetch the data of a picture  from the  website https://apo
 `https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY`
 
 
-
+<hr>
 
 
 
