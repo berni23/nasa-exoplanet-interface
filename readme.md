@@ -4,12 +4,13 @@
 
 <p><i><b> Author:</b><i> Bernat Ferrer</i></p>
 
+<br>
 
 
 ![Alt Text](assets/interface.gif)
 
 
-
+<br>
 
 
 <h3>Description</h3>
@@ -20,7 +21,7 @@ This project provides the user with an interface for a better interaction and vi
 
 <hr>
 
-
+<br>
 
 <h3>Folder structure</h3>
 
