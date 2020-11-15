@@ -42,17 +42,19 @@ This project provides the user with an interface for a better interaction and vi
 
 * **assets folder** :Project assets like logos, fonts or  json objects for rendering graphics
 
+<br>
   
 
 * **css folder**:  style sheets.
 
-   	 styles.css :  Style sheet for the index document.
+   	- styles.css :  Style sheet for the index document.
+    - app.css:  Style sheet for the app document.
 
-  ​      app.css:  Style sheet for the app document.
 
-  
+<br>
 
-- **tests folder / unit folder**: Folder containing the test documents  .
+
+* **tests folder / unit folder**: Folder containing the test documents  .
 
   - csvTest:  test class for the csv tools .
 
@@ -60,12 +62,14 @@ This project provides the user with an interface for a better interaction and vi
 
   - usersTest: Test class for validating and checking the data from the users.
 
-    
+<br>
 
-- **documentation folder**: folder containing the documentation.
 
-  * documentation.pdf: documentation regarding the developing of the project
-  * proposal.pdf: presentation of the initial proposal
+* **documentation folder**: folder containing the documentation.
+
+  - documentation.pdf: documentation regarding the developing of the project
+  
+  - proposal.pdf: presentation of the initial proposal
 
   * **Postman folder** : folder containing some of  example api  of the requests performed.
 
@@ -74,10 +78,15 @@ This project provides the user with an interface for a better interaction and vi
 - **server folder**:
 
   * api_requests.php: handles queries related with  fetching to the NASA api.
+  
   * csvTools.php: Set of functions for a better handling of csv files.
+  
   * sign.php: Handles the sign in , sign out and registering.
+   
   * utils.php: Set of general functions used throughout the server.
-  * viewmodel.php : Document recieving the queries from php that expect data in return 
+   
+  * viewmodel.php : Document recieving the queries from php that expect data in return.
+  
   * **data folder** :  Folder containing the user folders.
 
   
@@ -90,11 +99,13 @@ This project provides the user with an interface for a better interaction and vi
 
   * data.js: Document containing functions that fetch the server
 
-  * customCharts.js: Document containing  a class that enables a better  custom configuration of  a given chart, created with the chartjs library.
+  * customCharts.js: Document containing  a class that enables a better  custom configuration of  a given
+  
+    chart, created with the chartjs library.
 
   * validate.js: Set of functions used for validating  inputs.
 
-    ​		
+    	
 
 <hr>
 
