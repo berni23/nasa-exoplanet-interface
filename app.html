@@ -38,316 +38,278 @@
 
 <body>
 
-    <body>
-        <div class="wrapper">
-            <!-- Sidebar Holder -->
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>Exoplanet data interface</h3>
-                </div>
-                <div class="sidebar-body">
-                    <ul>
-                        <li class="Dropdown dropped statistics"><span>Statistics</span>
-                            <i class="caret fa fa-caret-right right hidden"></i>
-                            <i class="caret fa fa-caret-down down"></i>
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Exoplanet data interface</h3>
+            </div>
+            <div class="sidebar-body">
+                <ul>
+                    <li class="Dropdown dropped statistics"><span>Statistics</span>
+                        <i class="caret fa fa-caret-right right hidden"></i>
+                        <i class="caret fa fa-caret-down down"></i>
+                    </li>
+                    <ul class="dropdownMenu">
+                        <li class="my-content content-active" data-title='Distance to the star vs planet radius'
+                            data-content="canvas1"><span>distance vs planet
+                                radius</span>
                         </li>
-                        <ul class="dropdownMenu">
-                            <li class="my-content content-active" data-content="canvas1"><span>distance vs planet
-                                    radius</span>
-                            </li>
-                        </ul>
-                        <li class="Dropdown picture"><span>Astronomy picture</span>
+                    </ul>
+                    <li class="Dropdown picture"><span>Astronomy picture</span>
+                        <i class="caret fa fa-caret-right right"></i>
+                        <i class="caret fa fa-caret-down down hidden"></i>
+                    </li>
+                    <ul class="dropdownMenu hidden">
+                        <li class="my-content" data-title="Astronomy picture of the day" data-content="picture-today">
+                            <span></span></li>
+                        <li class="my-content" data-title="Astronomy picture of the day"
+                            data-content="picture-yesterday"><span></span>
+                        </li>
+                    </ul>
+                    <li class="Dropdown about"><span>About exoplanets</span>
+                        <i class="caret fa fa-caret-right right"></i>
+                        <i class="caret fa fa-caret-down down hidden"></i>
+                    </li>
+                    <ul class="dropdownMenu hidden">
+                        <li class="my-content">What are exoplanets?</li>
+                        <li class="my-content">Learn more</li>
+                    </ul>
+                    <li class=" Dropdown dropped statistics"><span>Extras</span>
+                        <i class="caret fa fa-caret-right right "></i>
+                        <i class="caret fa fa-caret-down down hidden"></i>
+                    </li>
+                    <ul class="dropdownMenu hidden ">
+                        <li class="Dropdown"><span>Some Extras</span>
                             <i class="caret fa fa-caret-right right"></i>
                             <i class="caret fa fa-caret-down down hidden"></i>
                         </li>
                         <ul class="dropdownMenu hidden">
-                            <li class="my-content"><span> Venus, Mercury, and the Waning Moon</span></li>
-                            <li class="my-content"><span>Saturn rings</span></li>
-                        </ul>
-                        <li class="Dropdown about"><span>About exoplanets</span>
-                            <i class="caret fa fa-caret-right right"></i>
-                            <i class="caret fa fa-caret-down down hidden"></i>
-                        </li>
-                        <ul class="dropdownMenu hidden">
-                            <li class="my-content">What are exoplanets?</li>
-                            <li class="my-content">Learn more</li>
-                        </ul>
-                        <li class=" Dropdown dropped statistics"><span>Extras</span>
-                            <i class="caret fa fa-caret-right right "></i>
-                            <i class="caret fa fa-caret-down down hidden"></i>
-                        </li>
-                        <ul class="dropdownMenu hidden ">
-                            <li class="Dropdown" data-content="canvas1"><span>Some Extras</span>
-                                <i class="caret fa fa-caret-right right"></i>
-                                <i class="caret fa fa-caret-down down hidden"></i>
-                            </li>
-                            <ul class="dropdownMenu hidden">
-                                <li>some other extras</li>
-                                <li>some more other extras</li>
-                            </ul>
+                            <li>some other extras</li>
+                            <li>some more other extras</li>
                         </ul>
                     </ul>
+                </ul>
 
-                    <div class="buttons-sidebar">
-                        <button id="log-out" class="btn btn-primary" data-toggle="modal" data-target="#logoutmodal">Log
-                            out</button>
-                        <button class="btn btn-primary">Refresh</button>
-                        </button>
+                <div class="buttons-sidebar">
+                    <button id="log-out" class="btn btn-primary" data-toggle="modal" data-target="#logoutmodal">Log
+                        out</button>
+                    <button class="btn btn-primary">Refresh</button>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <main id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="navbar-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <h3 id="plot-title" class="title">Distance to the star vs planet radius</h3>
+                    <div class="plot-settings">
+
+                        <div class="dropdown">
+                            <button class="btn button-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="label-sort-by iconify" data-icon="ic:sharp-group-work"
+                                    data-inline="false"></span></span>
+                            </button>
+                            <div id="menu-group-by" class="dropdown-menu dropdown-menu-right"
+                                aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" data-chart="chart-1-1" data-group="pl_discmethod">group by
+                                    discovering
+                                    technique</a>
+                                <a class="dropdown-item" data-chart="chart-1-2" data-group="pl_facility">group by
+                                    discovering
+                                    instrument</a>
+                                <a class="dropdown-item" data-chart="chart-1-3" data-group="pl_bmassj">group by
+                                    mass</a>
+                                <a class="dropdown-item" data-chart="chart-1">do not group</a>
+                            </div>
+                        </div>
+                        <button class="btn-plot-settings btn button-secondary" data-toggle="modal"
+                            data-target="#modal-plot-settings" type="button">
+                            <i class="fas fa-cog"></i></button>
+                        <button class="btn button-secondary" type="button"><i class="fas fa-comment"></i></button>
                     </div>
                 </div>
             </nav>
-            <main id="content">
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" class="navbar-btn">
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        <h3 id="plot-title" class="title">Distance to the star vs planet radius</h3>
-                        <div class="plot-settings">
+            <!-- <canvas id="myChart"></canvas> -->
 
-                            <div class="dropdown">
-                                <button class="btn button-secondary dropdown-toggle" type="button"
-                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    <span class="label-sort-by iconify" data-icon="ic:sharp-group-work"
-                                        data-inline="false"></span></span>
-                                </button>
-                                <div id="menu-group-by" class="dropdown-menu dropdown-menu-right"
-                                    aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" data-chart="chart-1-1" data-group="pl_discmethod">group by
-                                        discovering
-                                        technique</a>
-                                    <a class="dropdown-item" data-chart="chart-1-2" data-group="pl_facility">group by
-                                        discovering
-                                        instrument</a>
-                                    <a class="dropdown-item" data-chart="chart-1-3" data-group="pl_bmassj">group by
-                                        mass</a>
-                                    <a class="dropdown-item" data-chart="chart-1">do not group</a>
-                                </div>
-                            </div>
-                            <button class="btn-plot-settings btn button-secondary" data-toggle="modal"
-                                data-target="#modal-plot-settings" type="button">
-                                <i class="fas fa-cog"></i></button>
-                            <button class="btn button-secondary" type="button"><i class="fas fa-comment"></i></button>
-                        </div>
-                    </div>
-                </nav>
-                <!-- <canvas id="myChart"></canvas> -->
+            <div id="canvas1" class="canvas-wrapper">
+                <canvas id="chart-1" class="active"></canvas>
+                <canvas id="chart-1-1" class="hidden"></canvas>
+                <canvas id="chart-1-2" class="hidden"></canvas>
+                <canvas id="chart-1-3" class="hidden"></canvas>
+            </div>
+            <div id="picture-today" class="hidden">
+                <h4 class="picture-title"> </h4>
 
-                <div id="canvas1" class="canvas-wrapper hidden">
-                    <canvas id="chart-1" class="active"></canvas>
-                    <canvas id="chart-1-1" class="hidden"></canvas>
-                    <canvas id="chart-1-2" class="hidden"></canvas>
-                    <canvas id="chart-1-3" class="hidden"></canvas>
-                </div>
-                <div id="picture-today">
-                    <div class="picture-header">
-                        <h1> Astronomy Picture of the Day </h1>
-                        <p>
-                            <a href="archivepix.html">Discover the cosmos!</a>
-                            Each day a different image or photograph of our fascinating universe is
-                            featured, along with a brief explanation written by a professional astronomer.
-                        </p>
-                        <p>
-                            2020 November 15
-                        </p>
-                    </div>
-
-                    <div class="picture-wrapper">
-                        <img class="today-image" src="https:\\apod.nasa.gov\apod\image\2011\ngc5866_hst_1235.jpg"
-                            alt="See Explanation.  Clicking on the picture will download the highest resolution version available.">
-
-
+                <p class="picture-date">
+                </p>
+                <hr>
+                <br>
+                <div class="picture-wrapper">
+                    <img class="today-image" src=""
+                        alt="See Explanation.  Clicking on the picture will download the highest resolution version available.">
+                    <div class="description">
                         <div class="explanation-wrapper">
-                            <b> Edge-On Galaxy NGC 5866 </b> <br>
-                            <b> Image Credit: </b>
-                            <a href="https://www.nasa.gov/">NASA</a>,
-                            <a href="https://www.spacetelescope.org/">ESA</a>, and
-                            The <a
-                                href="https://hubblesite.org/resource-gallery/learning-resources/hubble-heritage">Hubble
-                                Heritage Team</a>
-                            (<a href="https://www.stsci.edu/">STScI</a>/<a
-                                href="https://www.aura-astronomy.org/">AURA</a>);
-                            <b> Acknowledgment: </b>
-                            <a href="http://pages.astronomy.ua.edu/keel/billkeel.html">W. Keel</a>
-                            (<a href="http://physics.ua.edu/">U. Alabama</a>)
-
+                        </div>
+                        <hr>
+                        <br>
+                        <div class="picture-footer">
                             <p>
-
-                                <b> Explanation: </b>
-                                Why is this galaxy so thin?
-
-                                Many disk galaxies are just as thin as NGC 5866,
-                                <a href="https://www.spacetelescope.org/images/opo0624a/">pictured here</a>, but are not
-                                <a href="ap010510.html">seen edge-on</a> from our vantage point.
-
-                                One galaxy that is situated edge-on is our own
-                                <a href="ap050605.html">Milky Way Galaxy</a>.
-
-                                Classified as a
-                                <a href="ap020408.html">lenticular galaxy</a>, NGC 5866
-                                has numerous and complex dust lanes appearing dark and red,
-                                while many of the bright stars in the disk give it a more blue underlying hue.
-
-                                The blue disk of young stars can be seen extending past the
-                                <a href="ap990919.html">dust</a> in the extremely thin galactic plane,
-                                while the bulge in the disk center appears tinged more orange from the
-                                older and redder stars that likely exist there.
-
-                                Although similar in mass to our
-                                <a href="https://solarsystem.nasa.gov/resources/285/the-milky-way-galaxy/">Milky Way
-                                    Galaxy</a>, light takes about 60,000
-                                <a
-                                    href="https://starchild.gsfc.nasa.gov/docs/StarChild/questions/question19.html">years</a>
-                                to cross
-                                <a href="https://ui.adsabs.harvard.edu/abs/2003AAS...20311002K/abstract">NGC 5866</a>,
-                                about
-                                30 percent less than light takes to cross our own Galaxy.
-
-                                In general, many disk galaxies are very thin because the gas that
-                                <a href="https://en.wikipedia.org/wiki/Galaxy_formation_and_evolution">formed them</a>
-                                collided with itself as it rotated about the gravitational center.
-
-                                Galaxy <a href="https://en.wikipedia.org/wiki/NGC_5866">NGC 5866</a>
-                                lies about 44 million light years distant toward the constellation of the Dragon
-                                (<a href="https://chandra.harvard.edu/photo/constellations/draco.html">Draco</a>).
-
-
+                                <b>NASA Official: </b> Phillip Newman
+                                <a href="lib/about_apod.html#srapply">Specific rights apply</a>.<br>
+                                <a href="https://www.nasa.gov/about/highlights/HP_Privacy.html">NASA Web
+                                    Privacy Policy and Important Notices</a><br>
+                                <b>A service of:</b>
+                                <a href="https://astrophysics.gsfc.nasa.gov/">ASD</a> at
+                                <a href="https://www.nasa.gov/">NASA</a> /
+                                <a href="https://www.nasa.gov/centers/goddard/">GSFC</a>
+                                <b>&amp;</b> <a href="http://www.mtu.edu/">Michigan Tech. U.</a><br>
                             </p>
-                            <p> </p>
-                            <div class="picture-footer">
-                                <b> Almost Hyperspace: </b>
-                                <a href="https://apod.nasa.gov/apod/random_apod.html">Random APOD Generator</a> <br>
-                                <b> Tomorrow's picture: </b>grecian skyscape
-
-                                <p> </p>
-                                <hr>
-                                <a href="ap201114.html">&lt;</a>
-                                <a href="archivepix.html">Archive</a>
-                                <a href="lib/apsubmit2015.html">Submissions</a>
-                                <a href="lib/aptree.html">Index</a>
-                                <a href="https://antwrp.gsfc.nasa.gov/cgi-bin/apod/apod_search">Search</a>
-                                <a href="calendar/allyears.html">Calendar</a>
-                                <a href="/apod.rss">RSS</a>
-                                <a href="lib/edlinks.html">Education</a>
-                                <a href="lib/about_apod.html">About APOD</a>
-                                <a href="http://asterisk.apod.com/discuss_apod.php?date=201115">Discuss</a>
-                                <a href="ap201116.html">&gt;</a>
-
-                                <hr>
-                                <p>
-                                    <b> Authors &amp; editors: </b>
-                                    <a href="http://www.phy.mtu.edu/faculty/Nemiroff.html">Robert Nemiroff</a>
-                                    (<a href="http://www.phy.mtu.edu/">MTU</a>) &amp;
-                                    <a href="https://antwrp.gsfc.nasa.gov/htmltest/jbonnell/www/bonnell.html">Jerry
-                                        Bonnell</a> (<a href="http://www.astro.umd.edu/">UMCP</a>)<br>
-                                    <b>NASA Official: </b> Phillip Newman
-                                    <a href="lib/about_apod.html#srapply">Specific rights apply</a>.<br>
-                                    <a href="https://www.nasa.gov/about/highlights/HP_Privacy.html">NASA Web
-                                        Privacy Policy and Important Notices</a><br>
-                                    <b>A service of:</b>
-                                    <a href="https://astrophysics.gsfc.nasa.gov/">ASD</a> at
-                                    <a href="https://www.nasa.gov/">NASA</a> /
-                                    <a href="https://www.nasa.gov/centers/goddard/">GSFC</a>
-                                    <br><b>&amp;</b> <a href="http://www.mtu.edu/">Michigan Tech. U.</a><br>
-                                </p>
-                            </div>
+                            <br>
+                            <hr>
+                            <p>
+                                <a href="https://apod.nasa.gov/apod/archivepix.html">Discover the cosmos!</a>
+                                Each day a different image or photograph of our fascinating universe is
+                                featured, along with a brief explanation written by a professional astronomer.
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-        </div>
+
+            <div id="picture-yesterday" class="hidden">
+                <h4 class="picture-title"> </h4>
+                <p class="picture-date">
+                </p>
+                <hr>
+                <br>
+                <div class="picture-wrapper">
+                    <img class="today-image" src="" alt="See Explanation">
+                    <div class="description">
+                        <div class="explanation-wrapper">
+                        </div>
+                        <hr>
+                        <br>
+                        <div class="picture-footer">
+                            <p>
+                                <b>NASA Official: </b> Phillip Newman
+                                <a href="lib/about_apod.html#srapply">Specific rights apply</a>.<br>
+                                <a href="https://www.nasa.gov/about/highlights/HP_Privacy.html">NASA Web
+                                    Privacy Policy and Important Notices</a><br>
+                                <b>A service of:</b>
+                                <a href="https://astrophysics.gsfc.nasa.gov/">ASD</a> at
+                                <a href="https://www.nasa.gov/">NASA</a> /
+                                <a href="https://www.nasa.gov/centers/goddard/">GSFC</a>
+                                <b>&amp;</b> <a href="http://www.mtu.edu/">Michigan Tech. U.</a><br>
+                            </p>
+                            <br>
+                            <hr>
+                            <p>
+                                <a href="https://apod.nasa.gov/apod/archivepix.html">Discover the
+                                    cosmos!</a>
+                                Each day a different image or photograph of our fascinating universe is
+                                featured, along with a brief explanation written by a professional
+                                astronomer.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
-
-
-        <!--modals-->
-        </div>
-        <div class="modal fade" id="modal-plot-settings" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title  mx-auto">Plot custom settings</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <ul>
-                            <li class="settings-title"><span>axis upper limits</span></li>
-                            <li><span>X-axis : </span><input id="max-x" class="input-axis"></li>
-                            <li><span>Y-axis : </span><input id="max-y" class="input-axis"></li>
-                        </ul>
-                        <ul>
-                            <li class="settings-title">Show or hide</li>
-                            <li> <span>Show legend: </span><input id="bool-legend" type=checkbox></li>
-                            <li><span>Show labels</span> <input id="bool-labels" type="checkbox"></li>
-                            <li><span>Show uncertainty</span> <input id="bool-uncertainty" type="checkbox"></li>
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id='edit-plot-settings'>apply</button>
-                        <button type="button" id="close-plot-settings" class="btn btn-secondary"
-                            data-dismiss="modal">cancel</button>
-                    </div>
+    </div>
+    <!--modals-->
+    </div>
+    <div class="modal fade" id="modal-plot-settings" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title  mx-auto">Plot custom settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li class="settings-title"><span>axis upper limits</span></li>
+                        <li><span>X-axis : </span><input id="max-x" class="input-axis"></li>
+                        <li><span>Y-axis : </span><input id="max-y" class="input-axis"></li>
+                    </ul>
+                    <ul>
+                        <li class="settings-title">Show or hide</li>
+                        <li> <span>Show legend: </span><input id="bool-legend" type=checkbox></li>
+                        <li><span>Show labels</span> <input id="bool-labels" type="checkbox"></li>
+                        <li><span>Show uncertainty</span> <input id="bool-uncertainty" type="checkbox"></li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id='edit-plot-settings'>apply</button>
+                    <button type="button" id="close-plot-settings" class="btn btn-secondary"
+                        data-dismiss="modal">cancel</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="modal" id="modal-data-update" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Good to see you again </h5>
-                    </div>
-                    <div class="modal-body">
-                        <p></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="confirm-update" class="btn btn-primary"
-                            data-dismiss="modal">update</button>
-                        <button type="button" id="cancel-update" class="btn btn-secondary"
-                            data-dismiss="modal">cancel</button>
-                    </div>
+    <div class="modal" id="modal-data-update" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Good to see you again </h5>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-update" class="btn btn-primary"
+                        data-dismiss="modal">update</button>
+                    <button type="button" id="cancel-update" class="btn btn-secondary"
+                        data-dismiss="modal">cancel</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Modal -->
+    <!-- Modal -->
 
-        <div class="modal fade" id="logoutmodal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="logOutModalLabel">We hope to see you again !</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        Are you sure?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="confirm-logout" class="btn btn-primary" data-dismiss="modal">Log
-                            out</button>
-                        <button type="button" id="cancel-logout" class="btn btn-secondary"
-                            data-dismiss="modal">cancel</button>
-                    </div>
+    <div class="modal fade" id="logoutmodal" tabindex="-1" role="dialog" aria-labelledby="logOutModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="logOutModalLabel">We hope to see you again !</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="confirm-logout" class="btn btn-primary" data-dismiss="modal">Log
+                        out</button>
+                    <button type="button" id="cancel-logout" class="btn btn-secondary"
+                        data-dismiss="modal">cancel</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="row spinner-wrapper hidden flex-column align-items-center">
-            <div class="spinner-border text-primary" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-            <div class="row">
-                <strong>Fetching data..</strong>
-            </div>
+    <div class="row spinner-wrapper hidden flex-column align-items-center">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="row">
+            <strong>Fetching data..</strong>
+        </div>
 
-    </body>
-    <script type='module' src="src/app.js" defer></script>
+</body>
+<script type='module' src="src/app.js" defer></script>
 
 </html>

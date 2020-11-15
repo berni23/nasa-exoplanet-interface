@@ -30,10 +30,9 @@ if (isset($_GET['data'])) {
 if (isset($_GET['picture'])) {
     $today = json_decode(file_get_contents($endpoint_picture . "?api_key=" . $api_key), true);
     $yesterday = json_decode(file_get_contents($endpoint_picture . "?api_key=" . $api_key . "&date=" . date('Y-m-d', strtotime("-1 days"))), true);
-    echo json_encode(array('status' => 200, "data" => array("today" => $today, "yesterday" => $yesterday), "date" => array($today['date'], $yesterday['date'])));
 
-
-    //date('Y-m-d', strtotime("-1 days")))
-
-    //  echo json_encode(array('status' => 200, "data" => $data, "date" => $data['date']));
-} //else  echo json_encode(array('status' => 400, "data" => null, "message" => "wrong parameter"));
+    $today['date'] = date('d F Y');
+    $yesterday['date'] = date('d F Y');
+    chmod('picture.json', 0755);
+    echo json_encode(array('status' => 200, "data" => array("today" => $today, "yesterday" => $yesterday), "date" => array(date('d F Y'), date('d F Y', strtotime("-1 days")))));
+}

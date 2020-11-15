@@ -246,6 +246,8 @@ ul {
 /* ASTRONOMY PICTURE */
 
 
+
+
 .picture-wrapper,
 .explanation-wrapper {
     margin: auto;
@@ -262,6 +264,14 @@ ul {
     margin-right: 20px;
 }
 
+.picture-title {
+    margin-bottom: 20px;
+
+}
+
+.picture-date {
+    margin-bottom: 20px;
+}
 
 /* Equal to scaleX(0.7) scaleY(0.7)
 }
