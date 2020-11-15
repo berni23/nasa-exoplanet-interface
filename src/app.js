@@ -1,79 +1,114 @@
 jQuery(function () {
-    var menuItems = $('.sidebar-body');
-    var sidebar = $('#sidebar');
-    var btnPlotSettings = $(".btn-plot-settings");
-    var plotTitle = $("#plot-title");
-    var modalDataUpdate = $("#modal-data-update");
-    var main = $('main');
-    var wait = $('.spinner-wrapper');
 
-    // input settngs
+            var menuItems = $('.sidebar-body');
+            var sidebar = $('#sidebar');
+            var btnPlotSettings = $(".btn-plot-settings");
+            var plotTitle = $("#plot-title");
+            var modalDataUpdate = $("#modal-data-update");
+            var main = $('main');
+            var wait = $('.spinner-wrapper');
 
-    var max_x = $("#max-x");
-    var max_y = $("#max-y");
-    var showLegend = $("#bool-legend");
-    var showLabels = $("#bool-labels");
-    var showUncertainty = $("#bool-uncertainty");
-    var configObject = {};
-    var chartObject = {}
+            // input settngs
 
-    // btnPlotSettings.trigger("click");
+            var max_x = $("#max-x");
+            var max_y = $("#max-y");
+            var showLegend = $("#bool-legend");
+            var showLabels = $("#bool-labels");
+            var showUncertainty = $("#bool-uncertainty");
+            var configObject = {};
+            var chartObject = {}
 
-    initialize();
+            // btnPlotSettings.trigger("click");
 
-    function initialize() {
-        askAPI().then(function (res) {
-            res = JSON.parse(res);
-            if (res["exists"]) {
-                modalDataUpdate.modal('show');
-                modalDataUpdate.find('.modal-body p').text(res["message"]);
-            } else queryApi();
-        })
-    }
+            //initialize();
 
-    function queryApi() {
-        wait.removeClass('hidden');
-        requestAPI().then(() => getDistanceVsRad('chart-1').then(config => {
-            wait.addClass("hidden");
-            plotChart(config)
-        }))
-    }
 
-    $("#confirm-update").on("click", () => queryApi())
-    $("#cancel-update").on("click", () => getDistanceVsRad('chart-1').then(config => plotChart(config)));
+            // resize();
 
-    $("#confirm-logout").on("click", function () {
-        destroySession();
-        window.location = "index.html";
-    })
+            function resize() {
 
-    btnPlotSettings.on("click", function () {
-        clearErrors();
-        var id = $("canvas.active").attr('id');
-        setSettingsToModal(configObject[id]);
-    });
-    $("#edit-plot-settings").on("click", function () {
-        var regex = /^\d+(\.\d+)*$/
-        var error = 'only numbers with decimals';
-        var conditions = [regex, regex];
-        var errors = [error, error];
-        var inputs = [max_x, max_y];
 
-        if (validateLoop(inputs, conditions, errors)) {
-            var id = $("canvas.active").attr('id');
-            var config = configObject[id];
-            setSettingsToConfig(config);
-            chartObject[id].destroy();
-            chartObject[id] = new Chart($("canvas.active"), config.getConfig());
-            $("#close-plot-settings").trigger("click");
-        }
-    });
-    $('#sidebarCollapse').on('click', function () {
-        sidebar.toggleClass('active');
-        $(this).toggleClass('active');
-        // if (!myChart.hasClass('hidden')) {
-        //     if (sidebar.hasClass('active')) myChart.width(`+=${menuWidth}`);
-        //     else myChart.width(`-=${menuWidth}`);
+                setTimeout(() => {
+                    var height_ini = $('.today-image').height();
+                    var width_ini = $('.today-image').width();
+
+                    console.log(height_ini);
+                    $('.today-image').css('transform', 'scale(0.6)');
+                    $('.today-image').css('margin-bottom', `${20 * height_ini / 100}px`);
+                    $('.today-image').css('rmargin-right', `${20 * width_ini / 100}px`);
+                    $('.explanation-wrapper').css('margin-right', `${20 * width_ini / 100}px`)
+
+                    $('.picture-wrapper').css('height', $('.today-image').innerHeight());
+
+                }, 1500)
+            }
+
+            function initialize() {
+                askAPI().then(function (res) {
+                    res = JSON.parse(res);
+                    if (res["exists"]) {
+                        modalDataUpdate.modal('show');
+                        modalDataUpdate.find('.modal-body p').text(res["message"]);
+                    } else queryApi();
+                })
+
+
+                requestAPI('picture').then(function (res) {
+
+                    console.log(res);
+                    res = JSON.parse(res);
+                })
+            }
+
+
+            function queryApi() {
+                wait.removeClass('hidden');
+                requestAPI('data', 'exoplanets').then(() => getDistanceVsRad('chart-1').then(config => {
+                    wait.addClass("hidden");
+                    plotChart(config)
+                }))
+            }
+
+            $("#confirm-update").on("click", () => queryApi());
+            $("#cancel-update").on("click", () => getDistanceVsRad('chart-1').then(config => plotChart(config)));
+            $("#confirm-logout").on("click", function () {
+                destroySession();
+                window.location = "index.html";
+            })
+
+            btnPlotSettings.on("click", function () {
+                clearErrors();
+                var id = $("canvas.active").attr('id');
+                setSettingsToModal(configObject[id]);
+            });
+            $("#edit-plot-settings").on("click", function () {
+                var regex = /^\d+(\.\d+)*$/
+                var error = 'only numbers with decimals';
+                var conditions = [regex, regex];
+                var errors = [error, error];
+                var inputs = [max_x, max_y];
+
+                if (validateLoop(inputs, conditions, errors)) {
+                    var id = $("canvas.active").attr('id');
+                    var config = configObject[id];
+                    setSettingsToConfig(config);
+                    chartObject[id].destroy();
+                    chartObject[id] = new Chart($("canvas.active"), config.getConfig());
+                    $("#close-plot-settings").trigger("click");
+                }
+            });
+            $('#sidebarCollapse').on('click', function () {
+                        sidebar.toggleClass('active');
+                        $(this).toggleClass('active');
+                        // if (!myChart.hasClass('hidden')) {
+                        //     if (sidebar.hasClass('active')) myChart.width(` += $ {
+                        menuWidth
+                    }
+                    `);
+        //     else myChart.width(` -= $ {
+                        menuWidth
+                    }
+                    `);
         // }
     });
 
@@ -98,25 +133,45 @@ jQuery(function () {
         }
         if (li.hasClass("my-content") && !li.hasClass("content-active")) {
             var lastActive = $(".content-active");
-            $(`#${lastActive.attr('data-content')}`).addClass('hidden');
+            $(`#
+                    $ {
+                        lastActive.attr('data-content')
+                    }
+                    `).addClass('hidden');
             lastActive.removeClass("content-active");
             li.addClass("content-active");
             var id = li.attr("data-content");
-            $(`#${id}`).removeClass('hidden');
+            $(`#
+                    $ {
+                        id
+                    }
+                    `).removeClass('hidden');
         }
     })
 
     function showCanvas(id) {
         $("canvas.active").addClass('hidden');
         $("canvas.active").removeClass('active');
-        $(`#${id}`).removeClass('hidden');
-        $(`#${id}`).addClass('active');
+        $(`#
+                    $ {
+                        id
+                    }
+                    `).removeClass('hidden');
+        $(`#
+                    $ {
+                        id
+                    }
+                    `).addClass('active');
     }
 
     $("#menu-group-by").on("click", function (event) {
         if ($(event.target) !== $(event.currentTarget)) {
             var id = $(event.target).attr("data-chart");
-            var chart = $(`#${id}`);
+            var chart = $(`#
+                    $ {
+                        id
+                    }
+                    `);
             if (!chart.hasClass('active')) {
                 if (id in configObject) showCanvas(id);
                 else {
@@ -141,8 +196,16 @@ jQuery(function () {
 
     function plotChart(config) {
         var id = config.getId();
-        $(`#${id}`).empty();
-        chartObject[id] = new Chart($(`#${id}`), config.getConfig());
+        $(`#
+                    $ {
+                        id
+                    }
+                    `).empty();
+        chartObject[id] = new Chart($(`#
+                    $ {
+                        id
+                    }
+                    `), config.getConfig());
         plotTitle.text(config.getTitle());
         showCanvas(id);
     }
@@ -257,7 +320,6 @@ jQuery(function () {
 
                 mass_values.forEach(function (mass_val, i) {
                     var j = indexMass(mass_val, mass_ranges);
-
                     datasets[j]['data'].push({
                         x: data["pl_orbsmax"][i],
                         y: data["pl_radj"][i]
@@ -290,5 +352,4 @@ jQuery(function () {
     function round(num) {
         return Math.round((num) * 100) / 100
     }
-
 });

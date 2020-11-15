@@ -3,8 +3,8 @@
  * @returns {promise} a promise, with a string message and a status( 400 or 200)
  */
 
-async function requestAPI() {
-    const res = await fetch('server/api_requests.php?data=exoplanets');
+async function requestAPI(param, value) {
+    const res = await fetch(`server/api_requests.php?${param}=${value}`);
     return await res.text();
 }
 
@@ -13,12 +13,10 @@ async function askAPI() {
     return await res.text();
 }
 
-
 async function fetchDistanceRad() {
     const res = await fetch('server/viewmodel.php?distance_rad');
     return await res.text();
 }
-
 async function getCurrentUser() {
     const res = await fetch('server/viewmodel.php?user');
     return await res.text();
@@ -40,8 +38,6 @@ async function getColumns(colnames, arrayNames) {
 function destroySession() {
     fetch('server/sign.php?destroy')
 }
-
-// getColumn(['pl_hostname'], ['pl_radj']).then(res => console.log(res));
 
 function dataScatter(dataX, dataY) {
     var data = dataX.map(function (x, i) {

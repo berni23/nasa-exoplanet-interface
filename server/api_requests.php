@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -29,13 +28,12 @@ if (isset($_GET['data'])) {
 }
 
 if (isset($_GET['picture'])) {
-    if ($_GET['picture'] == 'today') {
-        $data = json_decode(file_get_contents($endpoint_archive . "?api_key=" . $api_key), true);
-        echo json_encode(array('status' => 200, "data" => $data, "date" => $data['date']));
-    } elseif ($_GET['picture'] == 'yesterday') {
-        $yesterday =  date('d/m/Y', strtotime("-1 days"));
-        $data = json_decode(file_get_contents($endpoint_archive . "?api_key=" . $api_key . "&date=" . $yesterday), true);
-        echo json_encode(array('status' => 200, "data" => $data, "date" => $data['date']));
-    } else  echo json_encode(array('status' => 400, "data" => null, "message" => "wrong parameter"));
-}
-?>
+    $today = json_decode(file_get_contents($endpoint_picture . "?api_key=" . $api_key), true);
+    $yesterday = json_decode(file_get_contents($endpoint_picture . "?api_key=" . $api_key . "&date=" . date('Y-m-d', strtotime("-1 days"))), true);
+    echo json_encode(array('status' => 200, "data" => array("today" => $today, "yesterday" => $yesterday), "date" => array($today['date'], $yesterday['date'])));
+
+
+    //date('Y-m-d', strtotime("-1 days")))
+
+    //  echo json_encode(array('status' => 200, "data" => $data, "date" => $data['date']));
+} //else  echo json_encode(array('status' => 400, "data" => null, "message" => "wrong parameter"));
