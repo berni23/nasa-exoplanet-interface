@@ -4,3 +4,8 @@ tests/
 vendor/
 /node_modules
 /server/data/assembler
+
+documentation/
+data/bernat
+
+data/example

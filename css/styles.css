@@ -217,16 +217,19 @@ nav {
 }
 
 .stars {
-    background: #000 url(http://www.script-tutorials.com/demos/360/images/stars.png) repeat top center;
+    background: #000 url('../assets/images/stars.png') repeat top center;
+    /*http: //www.script-tutorials.com/demos/360/images/stars.png*/
 }
 
+
 .twinkling {
-    background: transparent url(http://www.script-tutorials.com/demos/360/images/twinkling.png) repeat top center;
+    background: transparent url('../assets/images/twinkling.png') repeat top center;
     -moz-animation: move-twink-back 200s linear infinite;
     -ms-animation: move-twink-back 200s linear infinite;
     -o-animation: move-twink-back 200s linear infinite;
     -webkit-animation: move-twink-back 200s linear infinite;
     animation: move-twink-back 200s linear infinite;
+    /* http: //www.script-tutorials.com/demos/360/images/twinkling.png*/
 }
 
 .hidden {
