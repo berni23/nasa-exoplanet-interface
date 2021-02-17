@@ -6,6 +6,7 @@ vendor/
 /server/data/assembler
 
 documentation/
-data/bernat
+data/*
 
-data/example
+
+.env
