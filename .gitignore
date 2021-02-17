@@ -2,7 +2,7 @@
 
 tests/
 vendor/
-/node_modules
+node_modules/
 /server/data/assembler
 
 documentation/
