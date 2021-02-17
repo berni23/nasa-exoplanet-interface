@@ -2,10 +2,18 @@
 
 session_start();
 
+require_once "../constants.php";
+
 include "utils.php";
+
+
 $endpoint_archive = 'https://exoplanetarchive.ipac.caltech.edu/cgi-bin/nstedAPI/nph-nstedAPI?';
 $endpoint_picture = 'https://api.nasa.gov/planetary/apod';
-$api_key = 'ZCrKb54pVc2uAAtKJ2lTo7v9hPSKloPXkenCr1X8';
+
+$api_key = $_ENV['API_KEY'];
+
+
+// $api_key = 'ZCrKb54pVc2uAAtKJ2lTo7v9hPSKloPXkenCr1X8';
 $dataPath = $_SESSION['data_path'];
 
 if (isset($_GET['ask'])) {
